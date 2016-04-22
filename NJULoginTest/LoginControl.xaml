@@ -1,0 +1,88 @@
+﻿<UserControl
+    x:Class="NJULoginTest.LoginControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NJULoginTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="LoginState">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="NoNetwork">
+                    <VisualState.Setters>
+                        <Setter Target="PRing.IsActive" Value="False" />
+                        <Setter Target="ActButtonContent.Text" Value="Retry" />
+                        <Setter Target="InputPanel.Visibility" Value="Visible" />
+                        <Setter Target="StatePanel.Visibility" Value="Collapsed" />
+                        <Setter Target="Input_Password.IsEnabled" Value="False" />
+                        <Setter Target="Input_Username.IsEnabled" Value="False" />
+                        <Setter Target="ActButton.IsEnabled" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LoggedIn">
+                    <VisualState.Setters>
+                        <Setter Target="PRing.IsActive" Value="False" />
+                        <Setter Target="ActButtonContent.Text" Value="Logout" />
+                        <Setter Target="InputPanel.Visibility" Value="Collapsed" />
+                        <Setter Target="StatePanel.Visibility" Value="Visible" />
+                        <Setter Target="UserState.Text" Value="LoggedIn as 123456789(KongTa)  [Student timing service]" />
+                        <Setter Target="SystemState.Text" Value="LoggedInSuccess" />
+                        <Setter Target="ActButton.IsEnabled" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LoggedOut">
+                    <VisualState.Setters>
+                        <Setter Target="PRing.IsActive" Value="False" />
+                        <Setter Target="ActButtonContent.Text" Value="LogIn" />
+                        <Setter Target="StatePanel.Visibility" Value="Collapsed" />
+                        <Setter Target="InputPanel.Visibility" Value="Visible" />
+                        <Setter Target="Input_Password.IsEnabled" Value="True" />
+                        <Setter Target="Input_Username.IsEnabled" Value="True" />
+                        <Setter Target="ActButton.IsEnabled" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Waiting">
+                    <VisualState.Setters>
+                        <Setter Target="PRing.IsActive" Value="True" />
+                        <Setter Target="Input_Password.IsEnabled" Value="False" />
+                        <Setter Target="Input_Username.IsEnabled" Value="False" />
+                        <Setter Target="ActButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel>
+            <TextBlock Name="Title" Text="Login &amp; Logout" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
+            <!-- text之后绑定到其他位置 -->
+            <Grid MaxWidth="600">
+                <StackPanel Name="InputPanel">
+                    <TextBox Name="Input_Username" PlaceholderText="Username Here" FontSize="18" BorderThickness="0"/>
+                    <PasswordBox Name="Input_Password" PlaceholderText="Password Here" FontSize="18" BorderThickness="0"/>
+                </StackPanel>
+                <StackPanel Name="StatePanel" Visibility="Collapsed">
+                    <TextBox Name="UserState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
+                    <TextBox Name="SystemState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
+                </StackPanel>
+            </Grid>
+            <Button Name="ActButton" HorizontalAlignment="Center" Margin="10">
+                <Grid>
+                    <ProgressRing Name="PRing" IsActive="False"/>
+                    <TextBlock Name="ActButtonContent" Text="Login"/>
+                </Grid>
+            </Button>
+        </StackPanel>
+        <TextBlock Text="StateChangeControl" FontSize="24" Margin="5" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
+            <Button Content="LoggedIn" Click="StateSwitch"/>
+            <Button Content="LoggedOut" Click="StateSwitch"/>
+            <Button Content="Waiting" Click="StateSwitch"/>
+            <Button Content="NoNetwork" Click="StateSwitch"/>
+            <Button Content="Theme" Click="ChangeTheme"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
