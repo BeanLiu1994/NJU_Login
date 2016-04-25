@@ -13,11 +13,18 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-
-    <StackPanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-        <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}"/>
-        <!--MaxWidth="600"-->
-        <Button Click="Button_Click" Content="ChangeAgeTest"/>
-        <local:LoginControl/>
-    </StackPanel>
+    <Grid>
+        <Image Source="/Assets/bg.jpg" Stretch="UniformToFill"/>
+        <local:WindowBL Margin="20" MaxWidth="480" HorizontalAlignment="Left" Title="Login &amp; Logout">
+            <local:WindowBL.InnerContent>
+                <StackPanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                    <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}"/>
+                    <!--MaxWidth="600"-->
+                    <Button Click="Button_Click" Content="ChangeAgeTest"/>
+                    <local:LoginControl/>
+                </StackPanel>
+            </local:WindowBL.InnerContent>
+        </local:WindowBL>
+        
+    </Grid>
 </Page>

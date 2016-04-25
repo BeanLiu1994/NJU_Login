@@ -1,0 +1,7 @@
+/obj/*
+/*/obj
+/*/AppPackages/*
+/*/bin/*
+/*/*lock*
+/DTAR*/*
+/TilesIcon/icon output
