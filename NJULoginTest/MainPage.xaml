@@ -6,25 +6,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Data_Template.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
     <Grid>
         <Image Source="/Assets/bg.jpg" Stretch="UniformToFill"/>
-        <local:WindowBL Margin="20" MaxWidth="480" HorizontalAlignment="Left" Title="Login &amp; Logout">
-            <local:WindowBL.InnerContent>
-                <StackPanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                    <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}"/>
-                    <!--MaxWidth="600"-->
-                    <Button Click="Button_Click" Content="ChangeAgeTest"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" Title="UserInfo">
+                <local:WindowBL.InnerContent>
+                    <Frame Name="InfoPage"/>
+                </local:WindowBL.InnerContent>
+            </local:WindowBL>
+            <local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" Title="UserInfo" Grid.Column="1">
+                <local:WindowBL.InnerContent>
                     <local:LoginControl/>
-                </StackPanel>
-            </local:WindowBL.InnerContent>
-        </local:WindowBL>
-        
+                </local:WindowBL.InnerContent>
+            </local:WindowBL>
+        </Grid>
     </Grid>
 </Page>

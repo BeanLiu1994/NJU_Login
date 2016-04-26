@@ -14,16 +14,22 @@ namespace LoggingSystem
         public static ControlSystem Current = new ControlSystem();
         public ObservableCollection<DataType_ShowInfo> ShowingData { get; protected set; }
         public StuInfo CurrentInfo { get; protected set; }
+        InfoGet myInfoGet = new InfoGet();
         public ControlSystem()
         {
             Current = this;
             ShowingData = new ObservableCollection<DataType_ShowInfo>();
             CurrentInfo = new StuInfo();
             CurrentInfo.PropertyChanged += CurrentInfoChanged;
+            myInfoGet.ChangeFetcher(new DataFetcher());
         }
         protected void CurrentInfoChanged(object sender, PropertyChangedEventArgs e)
         {
             PropertyInfo propertyInfo;
+            if(e.PropertyName==nameof(StuInfo.Notices))
+            {
+                return;
+            }
             propertyInfo = typeof(StuInfo).GetProperty(e.PropertyName, BindingFlags.Instance | BindingFlags.Public);
 
             var Find_result = ShowingData.Where(m => { return m.Title == e.PropertyName; });
@@ -44,19 +50,36 @@ namespace LoggingSystem
                     break;
             }
         }
-        public void ChangeBalance(double balance)
+        public async void RunInfoGet()
         {
-            CurrentInfo.Balance_Double = balance;
+            await myInfoGet.RunSession();
         }
     }
 
     // property ends with '_N' doesn't notify changes
+
     public class StuInfo : INotifyPropertyChanged
     {
+        public ReturnDataCodeMeaning ActSucceed { get; set; }
+        public ReplyCodeMeaning reply_code { get; set; }
+        public string reply_msg { get; set; }
+        public int month { get; set; }
+        public long accstarttime { get; set; }
         public string Uname_N { get; set; }
         public string FullName_N { get; set; }
 
-        public double balance_double;
+        private List<NoticeContent> notices;
+        public List<NoticeContent> Notices
+        {
+            get { return notices; }
+            set
+            {
+                notices = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notices)));
+            }
+        }
+
+        private double balance_double;
         public double Balance_Double
         {
             get { return balance_double; }
@@ -112,8 +135,8 @@ namespace LoggingSystem
             set { ipv6 = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IPV6))); }
         }
 
-        private DateTime onlinetime;
-        public DateTime OnlineTime
+        private TimeSpan onlinetime;
+        public TimeSpan OnlineTime
         {
             get { return onlinetime; }
             set { onlinetime = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OnlineTime))); }

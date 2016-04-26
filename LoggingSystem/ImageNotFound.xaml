@@ -1,0 +1,12 @@
+﻿<Grid x:Class="LoggingSystem.ImageNotFound"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LoggingSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="120" Height="100" Background="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock FontSize="32" FontFamily="Segoe MDL2 Assets" Text="&#xE8CD;" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+        <TextBlock FontSize="16" Text="图片加载失败" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+    </StackPanel>
+</Grid>

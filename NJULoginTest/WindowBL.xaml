@@ -24,8 +24,8 @@
         </Grid.RowDefinitions>
         <RelativePanel Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}">
             <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" Style="{StaticResource TitleTextStyle}"/>
-            <TextBlock Name="Normal" Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" Text="&#xE921;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
-            <TextBlock Name="Minimal" Visibility="Collapsed" Text="&#xE922;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
+            <TextBlock Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" Text="&#xE921;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
+            <TextBlock Visibility="{x:Bind Path=IsWindowCollapsed,Mode=OneWay}" Text="&#xE922;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
         </RelativePanel>
         <ScrollViewer Name="InnerView" Grid.Row="1" VerticalScrollBarVisibility="Hidden"
                       Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}"

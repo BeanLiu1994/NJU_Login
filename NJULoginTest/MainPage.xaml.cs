@@ -24,16 +24,11 @@ namespace NJULoginTest
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ObservableCollection<DataType_ShowInfo> mydata;
         public MainPage()
         {
             this.InitializeComponent();
-            mydata = ControlSystem.Current.ShowingData;
+            InfoPage.Navigate(typeof(ShowInfo));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ControlSystem.Current.ChangeBalance((double)DateTime.Now.Second);
-        }
     }
 }

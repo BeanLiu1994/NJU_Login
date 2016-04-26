@@ -1,12 +1,20 @@
-﻿using System;
+﻿using LoggingSystem;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using TileRefresh;
+using Toasts;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,8 +28,20 @@ namespace NJULoginTest
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>
+    interface SubPageInterface
+    {
+        void PageRefresh();
+    }
     sealed partial class App : Application
     {
+        #region 自定义的和LoggingSystem相关的部分
+
+        TileRefreshUtils myTRU = new TileRefreshUtils();
+        private void AllRefresh()
+        {
+            if (ShowInfo.Current != null) { ShowInfo.Current.PageRefresh(); }
+        }
+        #endregion
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
@@ -33,8 +53,41 @@ namespace NJULoginTest
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
+            LoggingSystem.LoggingSystem.HasWindow = true;
         }
 
+        private async void RegisterWorks()
+        {
+            var Timer_Condition = new IBackgroundCondition[]{
+                new SystemCondition(SystemConditionType.FreeNetworkAvailable)
+            };
+            await RegisterLiveTileTask(
+                NameManager.LIVETILETASK_Timer,
+                typeof(TileRefreshUtils).FullName,
+                new TimeTrigger(15, false),
+                Timer_Condition
+                );
+
+            //调试的时候可能不能手动触发它
+            await RegisterLiveTileTask(
+                NameManager.LIVETILETASK_NetWorkChanged,
+                typeof(TileRefreshUtils).FullName,
+                new SystemTrigger(SystemTriggerType.NetworkStateChange, false),
+                null
+                );
+            //await RegisterLiveTileTask(
+            //    NameManager.LIVETILETASK_UserPresent,
+            //    typeof(TileRefreshUtils).FullName,
+            //    new SystemTrigger(SystemTriggerType.UserPresent, false),
+            //    null
+            //    );
+        }
+
+        private void OnResuming(object sender, object e)
+        {
+            AllRefresh();
+        }
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -80,6 +133,62 @@ namespace NJULoginTest
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+
+            Launch_Cases(e);
+        }
+        private async void Launch_Cases(LaunchActivatedEventArgs e)
+        {
+            if (e != null && e.Arguments.Count() > 0)
+            {
+                string temp = e.Arguments;
+                temp = Regex.Replace(temp, "{\"", "");
+                temp = Regex.Replace(temp, "\"}", "");
+                temp = Regex.Replace(temp, "\",\"", " ");
+                temp = Regex.Replace(temp, "\":\"", " ");
+                string[] SplitResult = temp.Split(" ".ToCharArray());
+                if (SplitResult[1] == "toast")
+                {
+                    if (SplitResult.Count() != 4) return;
+                    Debug.WriteLine("目标URL: " + SplitResult[3]);
+                    var uri = new Uri(SplitResult[3]);
+                    await Windows.System.Launcher.LaunchUriAsync(uri);
+                }
+                else if (SplitResult[1] == "BalanceReminder")
+                {
+
+                }
+            }
+        }
+
+        protected async override void OnActivated(IActivatedEventArgs args)
+        {
+            if (ShowInfo.Current == null) { App.Current.Exit(); return; }
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                var protocalArgs = (ProtocolActivatedEventArgs)args;
+                //check:
+                if (protocalArgs.Uri.Scheme != "njuloginapp") return;
+                switch (protocalArgs.Uri.Authority.ToLower())
+                {
+                    case "saveofflinecontent":
+                        DataFetcher tempFetcher = new DataFetcher();
+                        UserPassSaver_Roam tempUPS_R = new UserPassSaver_Roam();
+                        string uname = "", upass = "";
+                        tempUPS_R.Load(ref uname, ref upass);
+                        if (uname != null && uname != "")
+                            await tempFetcher.SaveOfflineDebuggingContent(uname, upass);
+                        break;
+                    case "testmode":
+                        ShowInfo.Current.PageRefresh();
+                        break;
+                    case "toasttest":
+                        ToastsDef.SendNotification_TwoString("Test", "通知测试");
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -104,6 +213,47 @@ namespace NJULoginTest
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
+        }
+        //LiveTileSetting
+        public static async Task RegisterLiveTileTask(string _Name, string _TaskEntryPoint, IBackgroundTrigger _Trigger, IBackgroundCondition[] _ConditionTable)
+        {
+            //建立builder
+            var taskBuilder = new BackgroundTaskBuilder
+            {
+                Name = _Name,
+                TaskEntryPoint = _TaskEntryPoint
+            };
+            //清除已有的
+            var status = await BackgroundExecutionManager.RequestAccessAsync();
+            if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
+            {
+                return;
+            }
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.Clear();
+
+            foreach (var t in BackgroundTaskRegistration.AllTasks)
+            {
+                if (t.Value.Name == taskBuilder.Name)
+                {
+                    t.Value.Unregister(true);
+                }
+            }
+            //如果Trigger为null撤销这个后台任务
+            if (_Trigger == null) return;
+
+            //继续构建builder
+            taskBuilder.SetTrigger(_Trigger);
+
+            if (_ConditionTable != null)
+                foreach (var m in _ConditionTable)
+                {
+                    taskBuilder.AddCondition(m);
+                }
+
+            //注册
+            taskBuilder.Register();
+            Debug.WriteLine("注册了名为" + _Name + "的后台任务");
         }
     }
 }

@@ -45,8 +45,17 @@ namespace NJULoginTest
         public WindowBL()
         {
             this.InitializeComponent();
+            iswindowcollapsed = Visibility.Collapsed;
         }
 
+        private Visibility iswindowcollapsed;
+        public Visibility IsWindowCollapsed
+        {
+            get { return iswindowcollapsed; }
+            set { iswindowcollapsed = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsWindowCollapsed)));
+            }
+        }
         private Visibility iswindowvisible;
         public Visibility IsWindowVisible
         {
@@ -60,11 +69,11 @@ namespace NJULoginTest
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsWindowVisible)));
                 if (iswindowvisible == Visibility.Visible)
                 {
-                    Minimal.Visibility = Visibility.Collapsed;
+                    IsWindowCollapsed = Visibility.Collapsed;
                 }
                 else
                 {
-                    Minimal.Visibility = Visibility.Visible;
+                    IsWindowCollapsed = Visibility.Visible;
                 }
             }
         }

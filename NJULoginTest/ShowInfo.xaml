@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="NJULoginTest.ShowInfo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NJULoginTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="Data_ListItem">
+            <StackPanel Tapped="AddToPasteBoard" Tag="{Binding Path=Url}">
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Title}" Foreground="{StaticResource SystemControlForegroundAccentBrush}" FontSize="18" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Content}" FontSize="24" Margin="0,0,0,5"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+        <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}" ItemClick="AddToPasteBoard"/>
+    </Grid>
+</Page>
