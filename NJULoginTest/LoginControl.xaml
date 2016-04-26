@@ -57,12 +57,12 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <StackPanel>
-            <TextBlock Name="Title" Text="Login &amp; Logout" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
+            <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
             <!-- text之后绑定到其他位置 -->
             <Grid MaxWidth="600">
                 <StackPanel Name="InputPanel">
-                    <TextBox Name="Input_Username" PlaceholderText="Username Here" FontSize="18" BorderThickness="0"/>
-                    <PasswordBox Name="Input_Password" PlaceholderText="Password Here" FontSize="18" BorderThickness="0"/>
+                    <TextBox Name="Input_Username" PlaceholderText="Username Here" FontSize="18" BorderThickness="0" Text="{x:Bind Path=Username,Mode=TwoWay}"/>
+                    <PasswordBox Name="Input_Password" PlaceholderText="Password Here" FontSize="18" BorderThickness="0" Password="{x:Bind Path=Password,Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Name="StatePanel" Visibility="Collapsed">
                     <TextBox Name="UserState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
@@ -75,14 +75,6 @@
                     <TextBlock Name="ActButtonContent" Text="Login"/>
                 </Grid>
             </Button>
-        </StackPanel>
-        <TextBlock Text="StateChangeControl" FontSize="24" Margin="5" HorizontalAlignment="Center"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
-            <Button Content="LoggedIn" Click="StateSwitch"/>
-            <Button Content="LoggedOut" Click="StateSwitch"/>
-            <Button Content="Waiting" Click="StateSwitch"/>
-            <Button Content="NoNetwork" Click="StateSwitch"/>
-            <Button Content="Theme" Click="ChangeTheme"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

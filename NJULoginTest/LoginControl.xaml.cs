@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,28 +18,46 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NJULoginTest
 {
-    public sealed partial class LoginControl : UserControl
+    public sealed partial class LoginControl : UserControl,INotifyPropertyChanged
     {
         public LoginControl()
         {
             this.InitializeComponent();
+            Title = "Login &amp; Logout";
         }
-        private void StateSwitch(object sender, RoutedEventArgs e)
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string username;
+        public string Username
         {
-            VisualStateManager.GoToState(this, (sender as Button).Content as string, true);
+            get { return username; }
+            set { username = value; PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(Username))); }
         }
-        private void ChangeTheme(object sender, RoutedEventArgs e)
+        private string password;
+        public string Password
         {
-            switch (RequestedTheme)
-            {
-                case ElementTheme.Dark:
-                    this.RequestedTheme = ElementTheme.Light;
-                    break;
-                case ElementTheme.Default:
-                case ElementTheme.Light:
-                    this.RequestedTheme = ElementTheme.Dark;
-                    break;
-            }
+            get { return password; }
+            set { password = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Password))); }
         }
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set { title = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title))); }
+        }
+
+        private void StateSwitch(LoginUIState dest_state)
+        {
+            VisualStateManager.GoToState(this, dest_state.ToString(), true);
+        }
+    }
+    public enum LoginUIState
+    {
+        Normal = 0,
+        NoNetwork,
+        LoggedIn,
+        LoggedOut,
+        Waiting
     }
 }

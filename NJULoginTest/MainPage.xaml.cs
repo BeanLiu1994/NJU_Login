@@ -31,5 +31,18 @@ namespace NJULoginTest
             LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
         }
 
+        public void ChangeTheme()
+        {
+            switch (RequestedTheme)
+            {
+                case ElementTheme.Dark:
+                    this.RequestedTheme = ElementTheme.Light;
+                    break;
+                case ElementTheme.Default:
+                case ElementTheme.Light:
+                    this.RequestedTheme = ElementTheme.Dark;
+                    break;
+            }
+        }
     }
 }
