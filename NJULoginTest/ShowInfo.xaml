@@ -15,7 +15,7 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+    <Grid Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}">
         <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}" ItemClick="AddToPasteBoard"/>
     </Grid>
 </Page>

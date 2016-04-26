@@ -54,6 +54,7 @@ namespace NJULoginTest
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.Resuming += OnResuming;
+            RegisterWorks();
             LoggingSystem.LoggingSystem.HasWindow = true;
         }
 

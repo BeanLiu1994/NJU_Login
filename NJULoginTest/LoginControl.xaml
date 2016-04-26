@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <StackPanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+    <StackPanel Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LoginState">
                 <VisualState x:Name="Normal"/>
