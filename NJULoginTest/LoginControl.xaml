@@ -8,7 +8,27 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
+    <UserControl.Resources>
+        <Style x:Key="StateTextStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+        <Style x:Key="UsernameStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="PlaceholderText" Value="Username Here"/>
+        </Style>
+        <Style x:Key="PasswordStyle" TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="PlaceholderText" Value="Password Here"/>
+        </Style>
+        <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </UserControl.Resources>
     <StackPanel Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LoginState">
@@ -86,18 +106,19 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <StackPanel>
-            <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
+            <TextBox Margin="0,-41,0,0" Height="40" BorderThickness="0"/>
+            <TextBlock Name="Title" Text="{x:Bind Path=TitleStr,Mode=OneWay}" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="Title_Tapped"/>
             <!-- text之后绑定到其他位置 -->
             <Grid MaxWidth="600">
                 <StackPanel Name="StatePanel" Visibility="Collapsed">
-                    <TextBox Name="UserState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
-                    <TextBox Name="SystemState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
+                    <TextBox Name="UserState" Style="{StaticResource StateTextStyle}"/>
+                    <TextBox Name="SystemState" Style="{StaticResource StateTextStyle}"/>
                 </StackPanel>
                 <StackPanel Name="InputPanel">
-                    <TextBox Name="Input_Username" PlaceholderText="Username Here" FontSize="18" BorderThickness="0" Text="{x:Bind Path=Username,Mode=TwoWay}" KeyDown="KeyPress"/>
+                    <TextBox Name="Input_Username" Text="{x:Bind Path=Username,Mode=TwoWay}" KeyDown="KeyPress" Style="{StaticResource UsernameStyle}"/>
                     <Grid>
-                        <PasswordBox Name="Input_Password" PlaceholderText="Password Here" FontSize="18" BorderThickness="0" Password="{x:Bind Path=Password,Mode=TwoWay}" KeyDown="KeyPress"/>
-                        <CheckBox Name="SavePassword" Content="SavePassword" Margin="5,0" HorizontalAlignment="Right"/>
+                        <PasswordBox Name="Input_Password" Password="{x:Bind Path=Password,Mode=TwoWay}" KeyDown="KeyPress" Style="{StaticResource PasswordStyle}"/>
+                        <CheckBox Name="SavePassword" Content="SavePassword" Margin="5,0" HorizontalAlignment="Right" Style="{StaticResource CheckBoxStyle}"/>
                     </Grid>
                 </StackPanel>
             </Grid>

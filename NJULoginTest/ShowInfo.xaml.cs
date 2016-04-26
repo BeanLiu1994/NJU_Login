@@ -57,9 +57,9 @@ namespace NJULoginTest
                             break;
                         case ReturnDataCodeMeaning.Success:
                             AddItem("用户名", HArgs.fullname + "(" + HArgs.username + ")");
-                            AddItem("服务名称", HArgs.service_name);
-                            AddItem("登陆区域", HArgs.area_name);
                             AddItem("余额", HArgs.balance.ToString() + "元");
+                            AddItem("登陆区域", HArgs.area_name);
+                            AddItem("服务名称", HArgs.service_name);
                             AddItem("MAC地址", HArgs.mac);
                             AddItem("IPV4", HArgs.useripv4);
                             AddItem("IPV6", HArgs.useripv6);
@@ -69,11 +69,11 @@ namespace NJULoginTest
                 case Pages.GetVolume:
                     if (HArgs.ReturnCodeMeaning == ReturnDataCodeMeaning.Success)
                     {
-                        AddItem("在线时间", HArgs.onlineTime);
+                        AddItem("在线时间", HArgs.onlineTime, 2);
                     }
                     else
                     {
-                        AddItem("在线时间", "未知");
+                        AddItem("在线时间", "未知", 2);
                     }
                     break;
                 case Pages.LogoutPage:
@@ -86,15 +86,23 @@ namespace NJULoginTest
                 default: break;
             }
         }
-        private void AddItem(string title, string content)
+        private void AddItem(string title, string content,int index = -1)
         {
-            mydata.Add(new DataType_ShowInfo() { Title = title, Content = content, Url = content });
+            foreach (var m in mydata)
+            {
+                if (m.Title == title)
+                {
+                    m.Content = content;
+                    m.Url = content;
+                    return;
+                }
+            }
+            if (index == -1)
+                mydata.Add(new DataType_ShowInfo() { Title = title, Content = content, Url = content });
+            else if (index < mydata.Count && index >= 0) 
+                mydata.Insert(index, new DataType_ShowInfo() { Title = title, Content = content, Url = content });
         }
-
-        private void PageLoadEnd(object sender, RoutedEventArgs e)
-        {
-            PageRefresh();
-        }
+        
         public async void PageRefresh()
         {
             await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);

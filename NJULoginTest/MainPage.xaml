@@ -13,16 +13,18 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" Title="UserInfo">
+            <local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" VerticalAlignment="Top" Title="UserInfo">
                 <local:WindowBL.InnerContent>
-                    <Frame Name="InfoPage"/>
+                        <StackPanel>
+                            <Frame Name="LoginPage"/>
+                            <Frame Name="InfoPage"/>
+                        </StackPanel>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>
-            <local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" Title="LogIn Or Logout" Grid.Column="1">
+            <!--<local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" Title="LogIn Or Logout" Grid.Column="1">
                 <local:WindowBL.InnerContent>
-                    <Frame Name="LoginPage"/>
                 </local:WindowBL.InnerContent>
-            </local:WindowBL>
+            </local:WindowBL>-->
         </Grid>
     </Grid>
 </Page>

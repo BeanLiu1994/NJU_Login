@@ -40,8 +40,8 @@ namespace NJULoginTest
                     SavePassword.IsChecked = true;
                 }
             }
-
-            Title = "Login || Logout";
+            
+            TitleStr = "Login || Logout";
             reply_msg = "";
 
         }
@@ -130,10 +130,10 @@ namespace NJULoginTest
             set { password = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Password))); }
         }
         private string title;
-        public string Title
+        public string TitleStr
         {
             get { return title; }
-            set { title = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title))); }
+            set { title = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TitleStr))); }
         }
 
         private LoginUIState currentstate;
@@ -142,7 +142,8 @@ namespace NJULoginTest
             get { return currentstate; }
             set
             {
-                Debug.WriteLine("切换了状态状态" + currentstate.ToString() +  " => " + value.ToString());
+                if (currentstate == value) return;
+                Debug.WriteLine("切换了状态" + currentstate.ToString() +  " => " + value.ToString());
                 currentstate = value;StateSwitch(value);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentState)));
             }
@@ -195,6 +196,11 @@ namespace NJULoginTest
             {
                 ActButton_Click(ActButton as object, null);
             }
+        }
+        
+        private void Title_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PageRefresh();
         }
     }
     public enum LoginUIState

@@ -20,16 +20,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <RelativePanel Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}">
             <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" Style="{StaticResource TitleTextStyle}"/>
             <TextBlock Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" Text="&#xE921;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
             <TextBlock Visibility="{x:Bind Path=IsWindowCollapsed,Mode=OneWay}" Text="&#xE922;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
         </RelativePanel>
-        <ScrollViewer Name="InnerView" Grid.Row="1" VerticalScrollBarVisibility="Hidden"
-                      Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}"
-                       BorderThickness="1" 
-                       BorderBrush="{ThemeResource SystemControlHighlightAltListAccentLowBrush}"/>
+        <ScrollViewer Name="InnerView" Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" VerticalScrollBarVisibility="Hidden"
+              Grid.Row="1" BorderThickness="1" BorderBrush="{ThemeResource SystemControlHighlightAltListAccentLowBrush}"/>
     </Grid>
 </UserControl>
