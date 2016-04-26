@@ -34,8 +34,6 @@ namespace NJULoginTest
             Current = this;
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += InfoRefresh_ReturnDataEvent;
             mydata = ControlSystem.Current.ShowingData;
-
-            PageLoadEnd();
         }
         ~ShowInfo()
         {
@@ -52,7 +50,7 @@ namespace NJULoginTest
                     switch (HArgs.ReturnCodeMeaning)
                     {
                         case ReturnDataCodeMeaning.Fail:
-                            mydata.Add(new DataType_ShowInfo() { Title = HArgs.reply_msg, Content = "请尝试刷新或登陆后再试", Url = NameManager.RefreshPageNote });
+                            mydata.Add(new DataType_ShowInfo() { Title = HArgs.reply_msg, Content = "请尝试登陆后再试", Url = NameManager.RefreshPageNote });
                             break;
                         case ReturnDataCodeMeaning.NoNetWork:
                             mydata.Add(new DataType_ShowInfo() { Title = HArgs.reply_msg, Content = "请尝试刷新或稍后再试", Url = NameManager.RefreshPageNote });
@@ -78,6 +76,13 @@ namespace NJULoginTest
                         AddItem("在线时间", "未知");
                     }
                     break;
+                case Pages.LogoutPage:
+                    if (HArgs.ReturnCodeMeaning == ReturnDataCodeMeaning.Success)
+                    {
+                        mydata.Clear();
+                        mydata.Add(new DataType_ShowInfo() { Title = HArgs.reply_msg, Content = "您已登出....", Url = NameManager.RefreshPageNote });
+                    }
+                    break;
                 default: break;
             }
         }
@@ -86,7 +91,7 @@ namespace NJULoginTest
             mydata.Add(new DataType_ShowInfo() { Title = title, Content = content, Url = content });
         }
 
-        private void PageLoadEnd()
+        private void PageLoadEnd(object sender, RoutedEventArgs e)
         {
             PageRefresh();
         }
@@ -111,5 +116,6 @@ namespace NJULoginTest
                 Debug.WriteLine("复制了信息内容:" + tag);
             }
         }
+
     }
 }

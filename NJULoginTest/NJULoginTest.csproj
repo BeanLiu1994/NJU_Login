@@ -109,6 +109,9 @@
     <Compile Include="ShowInfo.xaml.cs">
       <DependentUpon>ShowInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowLogin.xaml.cs">
+      <DependentUpon>ShowLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowBL.xaml.cs">
       <DependentUpon>WindowBL.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ShowInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

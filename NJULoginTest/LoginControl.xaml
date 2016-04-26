@@ -21,6 +21,7 @@
                         <Setter Target="StatePanel.Visibility" Value="Collapsed" />
                         <Setter Target="Input_Password.IsEnabled" Value="False" />
                         <Setter Target="Input_Username.IsEnabled" Value="False" />
+                        <Setter Target="SavePassword.IsEnabled" Value="False" />
                         <Setter Target="ActButton.IsEnabled" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
@@ -30,8 +31,35 @@
                         <Setter Target="ActButtonContent.Text" Value="Logout" />
                         <Setter Target="InputPanel.Visibility" Value="Collapsed" />
                         <Setter Target="StatePanel.Visibility" Value="Visible" />
-                        <Setter Target="UserState.Text" Value="LoggedIn as 123456789(KongTa)  [Student timing service]" />
+                        <Setter Target="SavePassword.Visibility" Value="Collapsed" />
+                        <Setter Target="UserState.Text" Value="{x:Bind Path=reply_msg,Mode=OneWay}" />
                         <Setter Target="SystemState.Text" Value="LoggedInSuccess" />
+                        <Setter Target="UserState.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                        <Setter Target="SystemState.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                        <Setter Target="ActButton.IsEnabled" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LogInFailed">
+                    <VisualState.Setters>
+                        <Setter Target="PRing.IsActive" Value="False" />
+                        <Setter Target="ActButtonContent.Text" Value="LogIn" />
+                        <Setter Target="StatePanel.Visibility" Value="Collapsed" />
+                        <Setter Target="InputPanel.Visibility" Value="Visible" />
+                        <Setter Target="Title.Text" Value="{x:Bind Path=reply_msg,Mode=OneWay}" />
+                        <Setter Target="Input_Password.IsEnabled" Value="True" />
+                        <Setter Target="Input_Username.IsEnabled" Value="True" />
+                        <Setter Target="ActButton.IsEnabled" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LogOutFailed">
+                    <VisualState.Setters>
+                        <Setter Target="PRing.IsActive" Value="False" />
+                        <Setter Target="ActButtonContent.Text" Value="LogIn" />
+                        <Setter Target="StatePanel.Visibility" Value="Collapsed" />
+                        <Setter Target="InputPanel.Visibility" Value="Visible" />
+                        <Setter Target="Title.Text" Value="{x:Bind Path=reply_msg,Mode=OneWay}" />
+                        <Setter Target="Input_Password.IsEnabled" Value="True" />
+                        <Setter Target="Input_Username.IsEnabled" Value="True" />
                         <Setter Target="ActButton.IsEnabled" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
@@ -51,6 +79,7 @@
                         <Setter Target="PRing.IsActive" Value="True" />
                         <Setter Target="Input_Password.IsEnabled" Value="False" />
                         <Setter Target="Input_Username.IsEnabled" Value="False" />
+                        <Setter Target="SavePassword.IsEnabled" Value="False" />
                         <Setter Target="ActButton.IsEnabled" Value="False" />
                     </VisualState.Setters>
                 </VisualState>
@@ -60,19 +89,22 @@
             <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
             <!-- text之后绑定到其他位置 -->
             <Grid MaxWidth="600">
-                <StackPanel Name="InputPanel">
-                    <TextBox Name="Input_Username" PlaceholderText="Username Here" FontSize="18" BorderThickness="0" Text="{x:Bind Path=Username,Mode=TwoWay}"/>
-                    <PasswordBox Name="Input_Password" PlaceholderText="Password Here" FontSize="18" BorderThickness="0" Password="{x:Bind Path=Password,Mode=TwoWay}"/>
-                </StackPanel>
                 <StackPanel Name="StatePanel" Visibility="Collapsed">
                     <TextBox Name="UserState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
                     <TextBox Name="SystemState" FontSize="18" BorderThickness="0" IsReadOnly="True"/>
                 </StackPanel>
+                <StackPanel Name="InputPanel">
+                    <TextBox Name="Input_Username" PlaceholderText="Username Here" FontSize="18" BorderThickness="0" Text="{x:Bind Path=Username,Mode=TwoWay}" KeyDown="KeyPress"/>
+                    <Grid>
+                        <PasswordBox Name="Input_Password" PlaceholderText="Password Here" FontSize="18" BorderThickness="0" Password="{x:Bind Path=Password,Mode=TwoWay}" KeyDown="KeyPress"/>
+                        <CheckBox Name="SavePassword" Content="SavePassword" Margin="5,0" HorizontalAlignment="Right"/>
+                    </Grid>
+                </StackPanel>
             </Grid>
-            <Button Name="ActButton" HorizontalAlignment="Center" Margin="10">
+            <Button Name="ActButton" HorizontalAlignment="Center" Margin="10" Click="ActButton_Click">
                 <Grid>
                     <ProgressRing Name="PRing" IsActive="False"/>
-                    <TextBlock Name="ActButtonContent" Text="Login"/>
+                    <TextBlock Name="ActButtonContent" Text="Login" />
                 </Grid>
             </Button>
         </StackPanel>

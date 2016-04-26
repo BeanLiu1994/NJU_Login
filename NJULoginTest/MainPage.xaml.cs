@@ -28,6 +28,7 @@ namespace NJULoginTest
         {
             this.InitializeComponent();
             InfoPage.Navigate(typeof(ShowInfo));
+            LoginPage.Navigate(typeof(ShowLogin));
             LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
         }
 
