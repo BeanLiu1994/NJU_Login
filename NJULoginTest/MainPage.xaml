@@ -5,9 +5,10 @@
     xmlns:local="using:NJULoginTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="LoadedPage">
     <Grid>
-        <Image Source="/Assets/bg.jpg" Stretch="UniformToFill"/>
+        <local:PicInfoViewer x:Name="PicBkg"/>
+        <!--<Image Source="http://www.dujin.org/sys/bing/1920.php" Stretch="UniformToFill"/>-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

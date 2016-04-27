@@ -27,13 +27,12 @@ namespace NJULoginTest
     public sealed partial class ShowInfo : Page, SubPageInterface
     {
         public static ShowInfo Current;
-        private ObservableCollection<DataType_ShowInfo> mydata;
+        private ObservableCollection<DataType_ShowInfo> mydata = new ObservableCollection<DataType_ShowInfo>();
         public ShowInfo()
         {
             this.InitializeComponent();
             Current = this;
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += InfoRefresh_ReturnDataEvent;
-            mydata = ControlSystem.Current.ShowingData;
         }
         ~ShowInfo()
         {

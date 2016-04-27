@@ -45,5 +45,12 @@ namespace NJULoginTest
                     break;
             }
         }
+
+        private async void LoadedPage(object sender, RoutedEventArgs e)
+        {
+            PictureInfo mypicinfo = new PictureInfo();
+            var result = await mypicinfo.RunSession();
+            PicBkg.InputPicInfo = result;
+        }
     }
 }

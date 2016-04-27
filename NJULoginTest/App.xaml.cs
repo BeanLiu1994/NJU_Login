@@ -1,6 +1,7 @@
 ﻿using LoggingSystem;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -28,6 +29,31 @@ namespace NJULoginTest
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>
+    public class DataType_ShowInfo : INotifyPropertyChanged
+    {
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set { title = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title))); }
+        }
+
+        private string content;
+        public string Content
+        {
+            get { return content; }
+            set { content = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Content))); }
+        }
+
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set { url = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Url))); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
     interface SubPageInterface
     {
         void PageRefresh();
