@@ -38,6 +38,8 @@ namespace LoggingSystem
         #endregion
 
         public const string HTTPServerAddrPrefix = "http://visg.nju.edu.cn:16043";
+
+        public const string DirectOutServiceName = "直出服务";
     }
 
     public static class StringHelper

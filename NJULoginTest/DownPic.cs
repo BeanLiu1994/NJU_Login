@@ -20,6 +20,11 @@ namespace NJULoginTest
     {
         private const string url = "http://lab.dobyi.com/api/bing.php";
         private string RecentInfo;
+        public DataType_ShowInfo PreparedData { get; private set; }
+        public PictureInfo()
+        {
+            PreparedData = new DataType_ShowInfo();
+        }
         public async Task<DataType_ShowInfo> RunSession()
         {
             RecentInfo = await PostToUrl(url);
@@ -57,7 +62,12 @@ namespace NJULoginTest
         public DataType_ShowInfo GetPicInfo()
         {
             if (PicInfo != null)
-                return new DataType_ShowInfo() { Content = PicInfo.desc, Title = PicInfo.title, Url = PicInfo.url };
+            {
+                PreparedData.Content = PicInfo.desc;
+                PreparedData.Title = PicInfo.title;
+                PreparedData.Url = PicInfo.url;
+                return PreparedData;
+            }
             else return null;
         }
         

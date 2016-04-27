@@ -16,6 +16,6 @@
         </DataTemplate>
     </Page.Resources>
     <Grid Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}">
-        <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}" ItemClick="AddToPasteBoard"/>
+        <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}" ItemClick="AddToPasteBoard" SelectionMode="None"/>
     </Grid>
 </Page>

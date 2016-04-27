@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,13 +18,24 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NJULoginTest
 {
-    public sealed partial class PicInfoViewer : UserControl
+    public sealed partial class PicInfoViewer : UserControl, INotifyPropertyChanged
     {
         public PicInfoViewer()
         {
             this.InitializeComponent();
-            DataContext = InputPicInfo;
         }
-        public DataType_ShowInfo InputPicInfo { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private DataType_ShowInfo inputpicinfo;
+        public DataType_ShowInfo InputPicInfo
+        {
+            get { return inputpicinfo; }
+            set
+            {
+                inputpicinfo = value;
+                PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(InputPicInfo)));
+            }
+        }
     }
 }

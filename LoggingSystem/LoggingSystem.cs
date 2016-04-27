@@ -67,6 +67,7 @@ namespace LoggingSystem
             return MyAutoLoginSetting.State || MyNetworkStateChangeLoginSetting.State;
         }
 
+        private bool ServiceTypeIsDirectOut = false;
         private double balance = 0;
         public async void EventAfterLoginAndUserInfoGetHandler(Pages PageType, bool Hresult, ReturnData HArgs)
         {
@@ -74,11 +75,13 @@ namespace LoggingSystem
                 if (PageType == Pages.LoginPage || PageType == Pages.GetInfo)
                 {
                     balance = HArgs.balance;
+                    ServiceTypeIsDirectOut = HArgs.service_name == NameManager.DirectOutServiceName;
                     await RunConcreteUser(Pages.GetVolume);//这里必须等待
                 }
                 else if (PageType == Pages.GetVolume)//先后顺序一定是先info(or login)再volume的
                 {
-                    BalanceCheck(balance, HArgs.onlineTimeSpan);
+                    if(!ServiceTypeIsDirectOut)
+                        BalanceCheck(balance, HArgs.onlineTimeSpan);
                 }
         }
 

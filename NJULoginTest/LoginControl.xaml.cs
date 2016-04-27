@@ -50,8 +50,10 @@ namespace NJULoginTest
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent -= LoginInfoDataHandler;
         }
 
+        public string ServiceName { get; private set; }
         public void LoginInfoDataHandler(Pages PageType, bool Hresult, ReturnData HArgs)
         {
+            ServiceName = "";
             switch (PageType)
             {
                 case Pages.GetInfo:
@@ -61,6 +63,7 @@ namespace NJULoginTest
                     {
                         case ReturnDataCodeMeaning.Success:
                             CurrentState = LoginUIState.LoggedIn;
+                            ServiceName = HArgs.service_name;
                             if ((SavePassword.IsChecked.HasValue ? SavePassword.IsChecked.Value : false))
                             {
                                 UINFOSaver.Save(Username, Password);
@@ -167,6 +170,7 @@ namespace NJULoginTest
         {
             await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
         }
+        private bool PrompLogout = true;
         private async void ActButton_Click(object sender, RoutedEventArgs e)
         {
             var stateNow = CurrentState;
@@ -180,7 +184,18 @@ namespace NJULoginTest
                     break;
                 case LoginUIState.LoggedIn:
                 case LoginUIState.LogOutFailed:
-                    await Logout();
+                    if (ServiceName == NameManager.DirectOutServiceName && PrompLogout)
+                    {
+                        TitleStr = "当前是"+ NameManager.DirectOutServiceName + " 不建议登出";
+                        PrompLogout = false;
+                    }
+                    else if(!PrompLogout)
+                    {
+                        PrompLogout = true;
+                    }
+                    if (PrompLogout)
+                        Debug.WriteLine("logout processed");
+                    // await Logout();
                     break;
                 case LoginUIState.NoNetwork:
                     PageRefresh();
