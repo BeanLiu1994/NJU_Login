@@ -18,7 +18,8 @@ namespace NJULoginTest
 
     public class PictureInfo : LoggingSystem.DataFetcher
     {
-        private const string url = "http://lab.dobyi.com/api/bing.php";
+        private const string url = NameManager.HTTPServerAddrPrefix + "/cgi-bin/BingImageCGI.py";
+        private const string url_bak = "http://lab.dobyi.com/api/bing.php";
         private string RecentInfo;
         public DataType_ShowInfo PreparedData { get; private set; }
         public PictureInfo()
@@ -28,6 +29,8 @@ namespace NJULoginTest
         public async Task<DataType_ShowInfo> RunSession()
         {
             RecentInfo = await PostToUrl(url);
+            if (RecentInfo == "")
+                RecentInfo = await PostToUrl(url_bak);
             bool Connectivity = HandleRecentInfo();
             return GetPicInfo();
         }
@@ -63,7 +66,7 @@ namespace NJULoginTest
         {
             if (PicInfo != null)
             {
-                PreparedData.Content = PicInfo.desc;
+                PreparedData.Content = "© 2016 Microsoft\r\n\r\n" + PicInfo.desc;
                 PreparedData.Title = PicInfo.title;
                 PreparedData.Url = PicInfo.url;
                 return PreparedData;

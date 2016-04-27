@@ -53,11 +53,11 @@ namespace NJULoginTest
         public string ServiceName { get; private set; }
         public void LoginInfoDataHandler(Pages PageType, bool Hresult, ReturnData HArgs)
         {
-            ServiceName = "";
             switch (PageType)
             {
                 case Pages.GetInfo:
                 case Pages.LoginPage:
+                    ServiceName = "";
                     reply_msg = HArgs.reply_msg;
                     switch (HArgs.ReturnCodeMeaning)
                     {
@@ -90,6 +90,7 @@ namespace NJULoginTest
                     break;
                 case Pages.LogoutPage:
                     reply_msg = HArgs.reply_msg;
+                    ServiceName = "";
                     switch (HArgs.ReturnCodeMeaning)
                     {
                         case ReturnDataCodeMeaning.Success:
@@ -188,14 +189,15 @@ namespace NJULoginTest
                     {
                         TitleStr = "当前是"+ NameManager.DirectOutServiceName + " 不建议登出";
                         PrompLogout = false;
+                        CurrentState = LoginUIState.LoggedIn;
                     }
                     else if(!PrompLogout)
                     {
+                        TitleStr = "Login || Logout";
                         PrompLogout = true;
                     }
                     if (PrompLogout)
-                        Debug.WriteLine("logout processed");
-                    // await Logout();
+                        await Logout();
                     break;
                 case LoginUIState.NoNetwork:
                     PageRefresh();
