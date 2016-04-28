@@ -26,7 +26,7 @@ namespace NJULoginTest
             InputPicInfo = new DataType_ShowInfo() { Content="",Title = "欢迎使用",Url="/Assets/bg.jpg" };
         }
         
-        public async void ShowInfo()
+        public void ShowInfo()
         {
             VisualStateManager.GoToState(this, "W0", true);
         }

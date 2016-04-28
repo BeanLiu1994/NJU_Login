@@ -32,7 +32,7 @@ namespace NJULoginTest
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += SystemControl_ReturnDataEvent;
             InfoPage.Navigate(typeof(ShowInfo));
             LoginPage.Navigate(typeof(ShowLogin));
-            LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
+            NoticePage.Navigate(typeof(ShowNotice));
         }
         ~MainPage()
         {

@@ -24,8 +24,10 @@ namespace NJULoginTest
     public sealed partial class LoginControl : UserControl,INotifyPropertyChanged,SubPageInterface
     {
         private UserPassSaver_Roam UINFOSaver;
+        public static LoginControl Current;
         public LoginControl()
         {
+            Current = this;
             this.InitializeComponent();
 
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += LoginInfoDataHandler;

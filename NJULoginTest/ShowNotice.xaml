@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="NJULoginTest.ShowNotice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NJULoginTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="Notice_ListItem">
+            <StackPanel Tapped="Notice_Tapped" Tag="{Binding Path=Url}">
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Title}" Foreground="{StaticResource SystemControlForegroundAccentBrush}"  TextWrapping="Wrap" FontSize="18" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Content}" FontSize="24" Margin="0,0,0,5" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <StackPanel Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+        <TextBlock Text="Notices" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="RefreshPage"/>
+        <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" SelectionMode="None" ItemTemplate="{StaticResource Notice_ListItem}" Style="{StaticResource StuInfoListStyle}"/>
+    </StackPanel>
+</Page>
