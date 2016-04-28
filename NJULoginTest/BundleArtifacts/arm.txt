@@ -1,0 +1,3 @@
+MainPackage=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\ARM\Release\NJULoginTest_1.3.0.0_ARM.appx
+SymbolPackage=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\AppPackages\NJULoginTest_1.3.0.0_Test\NJULoginTest_1.3.0.0_ARM.appxsym
+ResourcePack=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\ARM\Release\NJULoginTest_1.3.0.0_scale-125.appx

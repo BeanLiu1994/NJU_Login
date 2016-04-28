@@ -18,7 +18,7 @@
                         <Setter Target="Window_1.Width" Value="300"/>
                         <Setter Target="Window_2.Width" Value="300"/>
                         <Setter Target="Window_3.Width" Value="300"/>
-                        <Setter Target="Window_2.{RelativePanel.Below}" Value="Window_1"/>
+                        <Setter Target="Window_2.(RelativePanel.Below)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="W500">
