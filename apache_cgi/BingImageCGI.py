@@ -1,0 +1,37 @@
+#!C:\Python27\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi
+import cgitb;cgitb.enable()
+import os
+import threading
+import codecs
+import urllib2
+import json
+from collections import OrderedDict
+import datetime
+
+def http_get():
+    url='http://lab.dobyi.com/api/bing.php'   #页面的地址
+    response = urllib2.urlopen(url)         #调用urllib2向服务器发送get请求
+    mydata = json.loads(response.read(),object_pairs_hook=OrderedDict)
+    response.close()
+    f = urllib2.urlopen(mydata["url"]) 
+    filetype = mydata["url"].split('.')[-1]
+    now=datetime.datetime.now()
+    otherStyleTime = now.strftime("%Y_%m_%d_BingImage")
+    filename = otherStyleTime + "." + filetype
+    if not os.path.exists("E:\\Server\\" + filename):
+        with open("E:\\Server\\" + filename, "wb") as code:
+            code.write(f.read()) 	
+	    f.close()
+    mydata["url"]=r"http://visg.nju.edu.cn:16043/" + filename
+    mydata["copyrightinfo"]="© 2016 Microsoft"
+    return json.dumps(mydata)                    #获取服务器返回的页面信息
+    
+
+print "Content-type:application/json' \r\n\r\n"
+	
+print(http_get())
+
+#print('{"title":"颜值巅峰","desc":"欢迎学弟学妹来305读研读博","url":"http://visg.nju.edu.cn:16043/ImageToday.jpg","copyrightinfo":" "}')
