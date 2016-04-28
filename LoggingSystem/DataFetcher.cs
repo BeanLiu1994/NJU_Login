@@ -102,6 +102,7 @@ namespace LoggingSystem
             //0号不保存
             for (int i = 0; i < (int)Pages.TopNum; ++i)
             {
+                await Task.Delay(100);
                 Pages temp = (Pages)i;
                 string content = "";
                 switch (temp)
@@ -127,7 +128,7 @@ namespace LoggingSystem
                 //if (content.Length != 0)
                 //    Allcontent += "\t" + Pages.LogoutPage.ToString() + ":" + content.RemoveEnter() + ",\n";
                 if (Allcontent.Length != 0)
-                    Allcontent += "\t" + Pages.LogoutPage.ToString() + ":" + @"{ ""reply_code"":101,""reply_msg"":""下线成功!""}" + ",\n";
+                    Allcontent += "\t" + Pages.LogoutPage.ToString() + ":" + @"{""reply_code"":101,""reply_msg"":""下线成功!""}" + ",\n";
             }
             //至此Allcontent的结尾是 "},\n" 删去两个字符可以去除逗号
             Allcontent = Allcontent.Remove(Allcontent.Count() - 2); Allcontent += "\n}";

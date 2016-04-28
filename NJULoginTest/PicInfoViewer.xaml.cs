@@ -28,7 +28,7 @@ namespace NJULoginTest
         
         public void ShowInfo()
         {
-            VisualStateManager.GoToState(this, "W500", true);
+            VisualStateManager.GoToState(this, "W860", true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
