@@ -18,8 +18,7 @@ namespace NJULoginTest
 
     public class PictureInfo : LoggingSystem.DataFetcher
     {
-        private const string url = "http://lab.dobyi.com/api/bing.php";
-        private const string url_bak2 = NameManager.HTTPServerAddrPrefix + "/cgi-bin/BingImageCGI.py";
+        private const string url = NameManager.HTTPServerAddrPrefix + "/cgi-bin/BingImageCGI.py";
         private const string url_bak = "http://lab.dobyi.com/api/bing.php";
         private string RecentInfo;
         public DataType_ShowInfo PreparedData { get; private set; }
@@ -67,7 +66,8 @@ namespace NJULoginTest
         {
             if (PicInfo != null)
             {
-                PreparedData.Content = "© 2016 Microsoft\r\n\r\n" + PicInfo.desc;
+                if (PicInfo.copyrightinfo == null) PicInfo.copyrightinfo = "© 2016 Microsoft";
+                PreparedData.Content = PicInfo.copyrightinfo + "\r\n\r\n" + PicInfo.desc;
                 PreparedData.Title = PicInfo.title;
                 PreparedData.Url = PicInfo.url;
                 return PreparedData;
@@ -87,6 +87,8 @@ namespace NJULoginTest
             public string desc { get; set; }
             [DataMember(Order = 2)]
             public string url { get; set; }
+            [DataMember(Order = 3)]
+            public string copyrightinfo { get; set; }
         }
         #endregion
     }
