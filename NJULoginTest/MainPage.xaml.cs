@@ -26,13 +26,17 @@ namespace NJULoginTest
     public sealed partial class MainPage : Page
     {
         DataType_ShowInfo PicInfoShowing = null;
+        public static MainPage Current;
+
         public MainPage()
         {
+            Current = this;
             this.InitializeComponent();
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += SystemControl_ReturnDataEvent;
             InfoPage.Navigate(typeof(ShowInfo));
             LoginPage.Navigate(typeof(ShowLogin));
             NoticePage.Navigate(typeof(ShowNotice));
+            SettingPage.Navigate(typeof(ShowSettings));
         }
         ~MainPage()
         {

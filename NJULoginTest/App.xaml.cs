@@ -65,7 +65,9 @@ namespace NJULoginTest
         TileRefreshUtils myTRU = new TileRefreshUtils();
         private void AllRefresh()
         {
-            if (ShowInfo.Current != null) { ShowInfo.Current.PageRefresh(); }
+            if (ShowLogin.Current != null) { ShowLogin.Current.PageRefresh(); }
+            if (ShowSettings.Current != null) { ShowSettings.Current.PageRefresh(); }
+            if (ShowNotice.Current != null) { ShowNotice.Current.PageRefresh(); }
         }
         #endregion
         /// <summary>
@@ -206,7 +208,7 @@ namespace NJULoginTest
                             await tempFetcher.SaveOfflineDebuggingContent(uname, upass);
                         break;
                     case "testmode":
-                        ShowInfo.Current.PageRefresh();
+                        ShowSettings.Current.ShowTestModeSetting();
                         break;
                     case "toasttest":
                         ToastsDef.SendNotification_TwoString("Test", "通知测试");

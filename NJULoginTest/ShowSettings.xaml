@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="NJULoginTest.ShowSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NJULoginTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+        <ToggleSwitch Name="ThemeSetting_UI" Header="主题" OffContent="亮色" OnContent="暗色" Margin="10" Toggled="ThemeSetter"/>
+        <ToggleSwitch Name="AutoLoginSetting_UI" Header="自动登录(打开应用时)" OffContent="关" OnContent="开" Margin="10" Toggled="AutoLoginSetter"/>
+        <ToggleSwitch Name="NetworkStateChangeLoginSetting_UI" Header="自动登录(网络变化时)" OffContent="关" OnContent="开" Margin="10" Toggled="NetworkStateChangeLoginSetter"/>
+        <ToggleSwitch Name="RefreshLoginSetting_UI" Header="自动登录(刷新磁贴时)" OffContent="关" OnContent="开" Margin="10" Toggled="RefreshLoginSetter"/>
+        <ToggleSwitch Name="TestModeSetting_UI" Header="测试模式" OffContent="关" OnContent="开" Margin="10" Toggled="TestModeSetter" Visibility="Collapsed"/>
+    </StackPanel>
+</Page>

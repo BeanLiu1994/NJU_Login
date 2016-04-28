@@ -30,7 +30,7 @@
                 </VisualState>
                 <VisualState x:Name="W860">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="860"/>
+                        <AdaptiveTrigger MinWindowWidth="780"/>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -41,14 +41,14 @@
             </TransitionCollection>
         </Grid.Transitions>
         <Image Source="{x:Bind Path=InputPicInfo.Url,Mode=OneWay}" Stretch="UniformToFill" HorizontalAlignment="Center" Tapped="ShowInfo"/>
-        <StackPanel Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{ThemeResource SystemControlPageBackgroundAltMediumBrush}">
+        <StackPanel Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{ThemeResource SystemControlPageBackgroundAltMediumBrush}">
             <StackPanel.Transitions>
                 <TransitionCollection>
                     <EntranceThemeTransition />
                 </TransitionCollection>
             </StackPanel.Transitions>
             <TextBlock x:Name="dt_title" Text="{x:Bind Path=InputPicInfo.Title,Mode=OneWay}" FontSize="27" Margin="5" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
-            <TextBlock x:Name="dt_content" Text="{x:Bind Path=InputPicInfo.Content,Mode=OneWay}" FontSize="12" Margin="5,0,5,5" HorizontalAlignment="Right" TextWrapping="Wrap" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}" MaxWidth="350" FlowDirection="RightToLeft"/>
+            <TextBlock x:Name="dt_content" Text="{x:Bind Path=InputPicInfo.Content,Mode=OneWay}" FontSize="12" Margin="5,0,5,5" HorizontalAlignment="Right" TextWrapping="Wrap" Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" MaxWidth="350" FlowDirection="RightToLeft"/>
         </StackPanel>
     </Grid>
 </UserControl>

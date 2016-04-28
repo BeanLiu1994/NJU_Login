@@ -17,6 +17,7 @@
                     <VisualState.Setters>
                         <Setter Target="Window_1.Width" Value="300"/>
                         <Setter Target="Window_2.Width" Value="300"/>
+                        <Setter Target="Window_3.Width" Value="300"/>
                         <Setter Target="Window_2.{RelativePanel.Below}" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -27,17 +28,20 @@
                     <VisualState.Setters>
                         <Setter Target="Window_1.Width" Value="480"/>
                         <Setter Target="Window_2.Width" Value="480"/>
-                        <Setter Target="Window_2.{RelativePanel.Below}" Value="Window_1"/>
+                        <Setter Target="Window_3.Width" Value="480"/>
+                        <Setter Target="Window_2.(RelativePanel.Below)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="W800">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="780"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Window_1.Width" Value="380"/>
                         <Setter Target="Window_2.Width" Value="380"/>
-                        <Setter Target="Window_2.{RelativePanel.Below}" Value="Window_1"/>
+                        <Setter Target="Window_3.Width" Value="380"/>
+                        <Setter Target="Window_2.(RelativePanel.RightOf)" Value="Window_1"/>
+                        <Setter Target="Window_3.(RelativePanel.RightOf)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="W1000">
@@ -47,11 +51,18 @@
                     <VisualState.Setters>
                         <Setter Target="Window_1.Width" Value="480"/>
                         <Setter Target="Window_2.Width" Value="480"/>
-                        <Setter Target="Window_2.{RelativePanel.RightOf}" Value="Window_1"/>
+                        <Setter Target="Window_3.Width" Value="480"/>
+                        <Setter Target="Window_2.(RelativePanel.RightOf)" Value="Window_1"/>
+                        <Setter Target="Window_3.(RelativePanel.RightOf)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <Grid.Transitions>
+            <TransitionCollection>
+                <AddDeleteThemeTransition/>
+            </TransitionCollection>
+        </Grid.Transitions>
         <local:PicInfoViewer x:Name="PicBkg"/>
         <!--<Image Source="http://www.dujin.org/sys/bing/1920.php" Stretch="UniformToFill"/>-->
         <RelativePanel>
@@ -65,10 +76,15 @@
                 </local:WindowBL.InnerContent>
             </local:WindowBL>
 
-            <local:WindowBL x:Name="Window_2" Margin="10" MaxWidth="480" Title="Notice"
-                            RelativePanel.RightOf="Window_1">
+            <local:WindowBL x:Name="Window_2" Margin="10" MaxWidth="480" Title="Notice">
                 <local:WindowBL.InnerContent>
                     <Frame Name="NoticePage"/>
+                </local:WindowBL.InnerContent>
+            </local:WindowBL>
+            <local:WindowBL x:Name="Window_3" Margin="10" MaxWidth="480" Title="Setting"
+                            RelativePanel.Below="Window_2">
+                <local:WindowBL.InnerContent>
+                    <Frame Name="SettingPage"/>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>
         </RelativePanel>
