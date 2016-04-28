@@ -3,8 +3,8 @@
 
 import cgi
 import cgitb;cgitb.enable()
-import os
 import threading
+import os
 import codecs
 import urllib2
 import json
@@ -12,9 +12,22 @@ from collections import OrderedDict
 import datetime
 
 def http_get():
+    infoname = "E:\\Server\\BingImageInfo.txt"
+    if os.path.exists(infoname):
+        finfo = open(infoname,"r")
+        info=finfo.read()
+        finfo.close()
+    else:
+        info=""
     url='http://lab.dobyi.com/api/bing.php'   #页面的地址
     response = urllib2.urlopen(url)         #调用urllib2向服务器发送get请求
-    mydata = json.loads(response.read(),object_pairs_hook=OrderedDict)
+    InfoGet=response.read()
+    if InfoGet==info:
+        return info
+    finfo = open(infoname,"w")
+    finfo.write(InfoGet)
+    finfo.close()
+    mydata = json.loads(InfoGet,object_pairs_hook=OrderedDict)
     response.close()
     f = urllib2.urlopen(mydata["url"]) 
     filetype = mydata["url"].split('.')[-1]
