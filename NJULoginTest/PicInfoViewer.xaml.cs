@@ -25,6 +25,11 @@ namespace NJULoginTest
             this.InitializeComponent();
             InputPicInfo = new DataType_ShowInfo() { Content="",Title = "欢迎使用",Url="/Assets/bg.jpg" };
         }
+        
+        public async void ShowInfo()
+        {
+            VisualStateManager.GoToState(this, "W0", true);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -37,6 +42,11 @@ namespace NJULoginTest
                 inputpicinfo = value;
                 PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(InputPicInfo)));
             }
+        }
+
+        private void ShowInfo(object sender, TappedRoutedEventArgs e)
+        {
+            ShowInfo();
         }
     }
 }

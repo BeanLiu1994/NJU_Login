@@ -11,7 +11,7 @@
     MinWidth="300">
     <UserControl.Resources>
         <Style x:Key="TitleTextStyle" TargetType="TextBlock">
-            <Setter Property="RelativePanel.AlignVerticalCenterWithPanel" Value="True"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="10,0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -24,9 +24,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <RelativePanel Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}">
-            <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" Style="{StaticResource TitleTextStyle}"/>
-            <TextBlock Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" Text="&#xE921;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
-            <TextBlock Visibility="{x:Bind Path=IsWindowCollapsed,Mode=OneWay}" Text="&#xE922;" RelativePanel.AlignRightWithPanel="True" Style="{StaticResource TitleTextStyle}" Tapped="shrink_Tapped" FontFamily="Segoe MDL2 Assets"/>
+            <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" Style="{StaticResource TitleTextStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <Button RelativePanel.AlignRightWithPanel="True" Tapped="shrink_Tapped" Background="Transparent" RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Grid>
+                    <TextBlock Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" Text="&#xE921;" Style="{StaticResource TitleTextStyle}" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock Visibility="{x:Bind Path=IsWindowCollapsed,Mode=OneWay}" Text="&#xE922;" Style="{StaticResource TitleTextStyle}" FontFamily="Segoe MDL2 Assets"/>
+                </Grid>
+            </Button>
         </RelativePanel>
         <ScrollViewer Name="InnerView" Visibility="{x:Bind Path=IsWindowVisible,Mode=OneWay}" VerticalScrollBarVisibility="Hidden"
               Grid.Row="1" BorderThickness="1" BorderBrush="{ThemeResource SystemControlHighlightAltListAccentLowBrush}"/>

@@ -5,8 +5,8 @@
     xmlns:local="using:NJULoginTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="LoadedPage">
-    <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+    mc:Ignorable="d" Loaded="LoadedPage" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+    <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowState">
                 <VisualState x:Name="Init"/>
