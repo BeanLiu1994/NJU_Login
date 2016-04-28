@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LoggingSystem;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -24,12 +25,26 @@ namespace NJULoginTest
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        DataType_ShowInfo PicInfoShowing = null;
         public MainPage()
         {
             this.InitializeComponent();
+            LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += SystemControl_ReturnDataEvent;
             InfoPage.Navigate(typeof(ShowInfo));
             LoginPage.Navigate(typeof(ShowLogin));
             LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
+        }
+        ~MainPage()
+        {
+            LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent -= SystemControl_ReturnDataEvent;
+        }
+
+        private async void SystemControl_ReturnDataEvent(Pages PageType, bool Hresult, ReturnData HArgs)
+        {
+            if (PageType == Pages.LoginPage || PageType == Pages.GetInfo)
+                if (HArgs.ReturnCodeMeaning == ReturnDataCodeMeaning.Success)
+                    if(PicInfoShowing == null)
+                        await RefreshPic();
         }
 
         public void ChangeTheme()
@@ -46,11 +61,17 @@ namespace NJULoginTest
             }
         }
 
+        public async Task RefreshPic()
+        {
+            var mypicinfo = new PictureInfo();
+            PicInfoShowing = await mypicinfo.RunSession();
+            if (PicInfoShowing != null)
+                PicBkg.InputPicInfo = PicInfoShowing;
+        }
+
         private async void LoadedPage(object sender, RoutedEventArgs e)
         {
-            PictureInfo mypicinfo = new PictureInfo();
-            var result = await mypicinfo.RunSession();
-            PicBkg.InputPicInfo = result;
+            await RefreshPic();
         }
     }
 }
