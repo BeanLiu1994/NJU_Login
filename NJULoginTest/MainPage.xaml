@@ -6,7 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="LoadedPage">
-    <Grid>
+    <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowState">
+                <VisualState x:Name="Init"/>
+                <VisualState x:Name="W320">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="320"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Window_1.Width" Value="300"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="W500">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Window_1.Width" Value="480"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <local:PicInfoViewer x:Name="PicBkg"/>
         <!--<Image Source="http://www.dujin.org/sys/bing/1920.php" Stretch="UniformToFill"/>-->
         <Grid>
@@ -14,7 +35,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <local:WindowBL Margin="10" MaxWidth="480" HorizontalAlignment="Left" VerticalAlignment="Top" Title="UserInfo">
+            <local:WindowBL x:Name="Window_1" Margin="10" MaxWidth="480" HorizontalAlignment="Left" VerticalAlignment="Top" Title="UserInfo">
                 <local:WindowBL.InnerContent>
                         <StackPanel>
                             <Frame Name="LoginPage"/>

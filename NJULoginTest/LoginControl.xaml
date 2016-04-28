@@ -29,7 +29,7 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
     </UserControl.Resources>
-    <StackPanel Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}">
+    <StackPanel Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LoginState">
                 <VisualState x:Name="Normal"/>
@@ -106,7 +106,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <StackPanel>
-            <TextBox Margin="0,-41,0,0" Height="40" BorderThickness="0"/>
+            <TextBox Margin="0,-40,0,0" Height="40" BorderThickness="0"/>
             <TextBlock Name="Title" Text="{x:Bind Path=TitleStr,Mode=OneWay}" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="Title_Tapped"/>
             <!-- text之后绑定到其他位置 -->
             <Grid MaxWidth="600">

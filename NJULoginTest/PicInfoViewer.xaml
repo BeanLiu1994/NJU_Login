@@ -12,9 +12,9 @@
         <DataTemplate x:Key="PicTemplate" x:DataType="local:DataType_ShowInfo">
             <Grid>
                 <Image Source="{x:Bind Path=Url,Mode=OneWay}" Stretch="UniformToFill" HorizontalAlignment="Center"/>
-                <StackPanel Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" FontSize="27" Margin="5,3" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Opacity="0.5"/>
-                    <TextBlock Text="{x:Bind Path=Content,Mode=OneWay}" FontSize="12" Margin="3" HorizontalAlignment="Right" TextWrapping="Wrap" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}" MaxWidth="360" Opacity="0.5" FlowDirection="RightToLeft"/>
+                <StackPanel Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{ThemeResource SystemControlPageBackgroundAltMediumBrush}">
+                    <TextBlock Text="{x:Bind Path=Title,Mode=OneWay}" FontSize="27" Margin="5,3" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Opacity="0.8"/>
+                    <TextBlock Text="{x:Bind Path=Content,Mode=OneWay}" FontSize="12" Margin="3" HorizontalAlignment="Right" TextWrapping="Wrap" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}" MaxWidth="360" Opacity="0.8" FlowDirection="RightToLeft"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
