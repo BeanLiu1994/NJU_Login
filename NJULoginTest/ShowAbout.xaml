@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="NJULoginTest.ShowAbout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NJULoginTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource SystemControlPageBackgroundAltMediumBrush}">
+        <StackPanel Margin="10">
+            <TextBlock Name="Title" Text="关于" FontSize="24" HorizontalAlignment="Center" Tapped="PageRefresh" Margin="0,5"/>
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Image Name="PicOfApp" Source="Assets/StoreLogo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Tapped="OpenStore"/>
+                <StackPanel Margin="30,3,3,3">
+                    <TextBlock Name="NameOfApp"/>
+                    <TextBlock Name="VersionOfApp"/>
+                    <TextBlock Name="InstalledDateOfApp"/>
+                </StackPanel>
+                <Button Content="给我评价" Tapped="OpenReview" Margin="15"/>
+            </StackPanel>
+            <TextBlock Text="说明" FontSize="24" HorizontalAlignment="Center" Margin="0,5"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="仅能在南京大学校园网内使用" TextWrapping="Wrap" Margin="5,5,5,0"/>
+                <TextBlock Text="点击标题可以刷新页面" TextWrapping="Wrap" Margin="5,5,5,0"/>
+                <TextBlock Text="登陆信息保存后会在不同设备间同步，前提是登陆了相同的微软账号" TextWrapping="Wrap" Margin="5,5,5,0"/>
+                <TextBlock Text="在信息页点击文字部分可以复制内容" TextWrapping="Wrap" Margin="5,5,5,0"/>
+                <TextBlock Text="有新通知会发出通知消息，在通知页点击文字部分可以打开对应的链接" TextWrapping="Wrap" Margin="5,5,5,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

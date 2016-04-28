@@ -1,6 +1,7 @@
 ﻿using LoggingSystem;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -68,6 +69,8 @@ namespace NJULoginTest
 
             MyNetworkStateChangeLoginSetting.LoadSetting();
             NetworkStateChangeLoginSetting_UI.IsOn = (MyNetworkStateChangeLoginSetting.State);
+
+            Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }
         private void PageRefresh(object sender, TappedRoutedEventArgs e)
         {

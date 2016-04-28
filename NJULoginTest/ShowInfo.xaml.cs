@@ -105,6 +105,7 @@ namespace NJULoginTest
         public async void PageRefresh()
         {
             await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
+            Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }
         
         private void AddToPasteBoard(object sender, RoutedEventArgs e)
