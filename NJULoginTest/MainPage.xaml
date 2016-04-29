@@ -83,7 +83,10 @@
             <local:WindowBL x:Name="Window_3" Margin="10" MaxWidth="480" Title="Setting"
                             RelativePanel.Below="Window_2">
                 <local:WindowBL.InnerContent>
-                    <Frame Name="SettingPage"/>
+                    <StackPanel>
+                        <Frame Name="SettingPage"/>
+                        <Frame Name="AboutPage" Visibility="Collapsed"/>
+                    </StackPanel>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>
         </RelativePanel>

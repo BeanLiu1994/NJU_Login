@@ -35,6 +35,7 @@ namespace NJULoginTest
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += SystemControl_ReturnDataEvent;
             InfoPage.Navigate(typeof(ShowInfo));
             LoginPage.Navigate(typeof(ShowLogin));
+            AboutPage.Navigate(typeof(ShowAbout));
             NoticePage.Navigate(typeof(ShowNotice));
             SettingPage.Navigate(typeof(ShowSettings));
         }
