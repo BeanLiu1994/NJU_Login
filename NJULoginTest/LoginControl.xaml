@@ -109,7 +109,7 @@
             <TextBox Margin="0,-40,0,0" Height="40" BorderThickness="0"/>
             <TextBlock Name="Title" Text="{x:Bind Path=TitleStr,Mode=OneWay}" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="Title_Tapped"/>
             <!-- text之后绑定到其他位置 -->
-            <Grid MaxWidth="600">
+            <Grid>
                 <StackPanel Name="StatePanel" Visibility="Collapsed">
                     <TextBox Name="UserState" Style="{StaticResource StateTextStyle}"/>
                     <TextBox Name="SystemState" Style="{StaticResource StateTextStyle}"/>

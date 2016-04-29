@@ -228,16 +228,14 @@
                     </StackPanel>
                 </PivotItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <ScrollViewer>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Frame x:Name="LoginPage"/>
-                            <Frame x:Name="NoticePage" Grid.Row="1"/>
-                        </Grid>
-                    </ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Frame x:Name="LoginPage"/>
+                        <Frame x:Name="NoticePage" Grid.Row="1"/>
+                    </Grid>
                 </ScrollViewer>
             </PivotItem>
             <PivotItem>
@@ -247,7 +245,7 @@
                         <TextBlock Text="信息" FontSize="13.333" />
                     </StackPanel>
                 </PivotItem.Header>
-                <ScrollViewer>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <Frame x:Name="InfoPage"/>
                 </ScrollViewer>
             </PivotItem>
@@ -272,7 +270,7 @@
             <PivotItem>
                 <PivotItem.Header>
                     <StackPanel>
-                        <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="26.667" HorizontalAlignment="Center" />
+                        <TextBlock Text="&#xE890;" FontFamily="Segoe MDL2 Assets" FontSize="26.667" HorizontalAlignment="Center" />
                         <TextBlock Text="背景" FontSize="13.333" />
                     </StackPanel>
                 </PivotItem.Header>
