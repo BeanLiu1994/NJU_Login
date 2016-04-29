@@ -75,7 +75,6 @@
                     </StackPanel>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>
-
             <local:WindowBL x:Name="Window_2" Margin="10" MaxWidth="480" Title="Notice">
                 <local:WindowBL.InnerContent>
                     <Frame Name="NoticePage"/>

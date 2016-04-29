@@ -22,8 +22,8 @@ def http_get():
     url='http://lab.dobyi.com/api/bing.php'   #页面的地址
     response = urllib2.urlopen(url)         #调用urllib2向服务器发送get请求
     InfoGet=response.read()
-    if InfoGet==info:
-        return info
+    if len(InfoGet)==0:
+        return ""
     finfo = open(infoname,"w")
     finfo.write(InfoGet)
     finfo.close()
@@ -34,7 +34,7 @@ def http_get():
     now=datetime.datetime.now()
     otherStyleTime = now.strftime("%Y_%m_%d_BingImage")
     filename = otherStyleTime + "." + filetype
-    if not os.path.exists("E:\\Server\\" + filename):
+    if InfoGet!=info and not os.path.exists("E:\\Server\\" + filename):
         with open("E:\\Server\\" + filename, "wb") as code:
             code.write(f.read()) 	
 	    f.close()
