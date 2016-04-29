@@ -233,8 +233,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Frame x:Name="LoginPage"/>
-                        <Frame x:Name="NoticePage" Grid.Row="1"/>
+                        <Frame Name="LoginPage"/>
+                        <Frame Name="NoticePage" Grid.Row="1"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
@@ -246,7 +246,14 @@
                     </StackPanel>
                 </PivotItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <Frame x:Name="InfoPage"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Frame Name="InfoPage"/>
+                        <Frame Name="EasterPage" Grid.Row="1"/>
+                    </Grid>
                 </ScrollViewer>
             </PivotItem>
             <PivotItem>
@@ -262,8 +269,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Frame x:Name="SettingPage"/>
-                        <Frame x:Name="AboutPage" Grid.Row="1"/>
+                        <Frame Name="SettingPage"/>
+                        <Frame Name="AboutPage" Grid.Row="1"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>

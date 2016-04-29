@@ -86,7 +86,13 @@
                 <local:WindowBL.InnerContent>
                     <StackPanel>
                         <Frame Name="SettingPage"/>
-                        <Frame Name="AboutPage" Visibility="Collapsed"/>
+                        <Grid Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}" >
+                            <local:WindowBL x:Name="Window_4" MaxWidth="398" Title="About" local:WindowBL.IsWindowVisible="Collapsed" Margin="0,10">
+                                <local:WindowBL.InnerContent>
+                                    <Frame Name="AboutPage"/>
+                                </local:WindowBL.InnerContent>
+                            </local:WindowBL>
+                        </Grid>
                     </StackPanel>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>

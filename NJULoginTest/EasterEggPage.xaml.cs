@@ -56,8 +56,15 @@ namespace NJULoginTest
                 {
                     EasterEggContainer.Visibility = Visibility.Collapsed;
                 }
+                RectRefresh();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EasterEggText)));
             }
+        }
+
+        private async void RectRefresh()
+        {
+            await Task.Delay(500);
+            ClipRectangle.Rect = new Rect(0, 0, ActualWidth, this.ActualHeight);
         }
 
         private async void EasterEgg_ReturnDataEvent(Pages PageType, bool Hresult, ReturnData HArgs)
@@ -146,5 +153,6 @@ namespace NJULoginTest
         {
             PageRefresh();
         }
+        
     }
 }
