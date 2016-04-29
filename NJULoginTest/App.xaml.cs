@@ -15,6 +15,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
+using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -63,11 +65,11 @@ namespace NJULoginTest
         #region 自定义的和LoggingSystem相关的部分
 
         TileRefreshUtils myTRU = new TileRefreshUtils();
-        private void AllRefresh()
-        {
+        private async void AllRefresh()
+        {            
             if (ShowLogin.Current != null) { ShowLogin.Current.PageRefresh(); }
-            if (ShowSettings.Current != null) { ShowSettings.Current.PageRefresh(); }
             if (ShowNotice.Current != null) { ShowNotice.Current.PageRefresh(); }
+            if (ShowSettings.Current != null) { ShowSettings.Current.PageRefresh(); }
         }
         #endregion
         /// <summary>
@@ -84,6 +86,28 @@ namespace NJULoginTest
             this.Resuming += OnResuming;
             RegisterWorks();
             LoggingSystem.LoggingSystem.HasWindow = true;
+            NetworkInformation.NetworkStatusChanged += async (object sener) =>
+            {
+                await ShowLogin.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                     ShowLogin.Current.PageRefresh();
+                });
+            };
+            NetworkInformation.NetworkStatusChanged += async (object sener) =>
+            {
+                await ShowNotice.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    ShowNotice.Current.PageRefresh();
+                });
+            };
+            NetworkInformation.NetworkStatusChanged += async (object sener) =>
+            {
+                await MainPage.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    await MainPage.Current.RefreshPic();
+                });
+            };
+
         }
 
         private async void RegisterWorks()

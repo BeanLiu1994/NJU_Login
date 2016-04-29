@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Networking.Connectivity;
 using LoggingSystem;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -68,6 +69,8 @@ namespace NJULoginTest
 
         public async Task RefreshPic()
         {
+            var profile = NetworkInformation.GetInternetConnectionProfile();
+            if (profile.IsWwanConnectionProfile) return;
             var mypicinfo = new PictureInfo();
             PicInfoShowing = await mypicinfo.RunSession();
             if (PicInfoShowing != null)
