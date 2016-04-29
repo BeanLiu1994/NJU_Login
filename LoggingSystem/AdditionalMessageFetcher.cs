@@ -33,6 +33,8 @@ namespace LoggingSystem
         {
             try
             {
+                if (NetworkCheck.IsWwanConnectionNow())
+                    throw new Exception("WwanNetworkNow");
                 Image img = new Image();
                 // 扩展名必须匹配 FileOpenPicker.FileTypeFilter 中的定义
                 StorageFile file = await StorageFile.CreateStreamedFileFromUriAsync("mvp.gif", url, RandomAccessStreamReference.CreateFromUri(url));
@@ -84,6 +86,7 @@ namespace LoggingSystem
         public virtual async Task<bool> Run(string Uname)
         {
             result_Analysed = new AdditionalMessageContainer() { Content = "", Title = "Fail", url = null };
+            if (Uname != null && Uname == "") return false;
             bool Hresult = await GetMessage(Uname);
             if (Hresult) Hresult = AnalyseContent();
             if (Hresult && CheckUser(Uname)) SendMessage();

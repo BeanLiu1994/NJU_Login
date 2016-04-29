@@ -112,6 +112,7 @@
     <Compile Include="Encrypt.cs" />
     <Compile Include="NameManager.cs" />
     <Compile Include="LoggingSystem.cs" />
+    <Compile Include="NetworkCheck.cs" />
     <Compile Include="PageActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingSaver.cs" />

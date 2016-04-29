@@ -1,6 +1,7 @@
 ﻿using LoggingSystem;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,9 +24,12 @@ namespace NJULoginTest
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class ShowLogin : Page,SubPageInterface
+    public sealed partial class ShowLogin : Page,SubPageInterface,INotifyPropertyChanged
     {
         public static ShowLogin Current;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ShowLogin()
         {
             this.InitializeComponent();
@@ -56,8 +60,8 @@ namespace NJULoginTest
                     {
                         UsageSurvey myUS = new UsageSurvey();
                         myUS.Run(HArgs.username);
+                        //不用等
                     }
-                    //不用等
                     break;
                 default:
                     break;

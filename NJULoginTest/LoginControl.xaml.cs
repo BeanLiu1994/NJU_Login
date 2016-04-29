@@ -31,6 +31,12 @@ namespace NJULoginTest
             Current = this;
             this.InitializeComponent();
 
+            TitleStr = InitTitlestr;
+            reply_msg = "";
+            LoginUserInfo = "";
+            Username = "";
+            Password = "";
+
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += LoginInfoDataHandler;
             UINFOSaver = new UserPassSaver_Roam();
             {
@@ -43,10 +49,6 @@ namespace NJULoginTest
                     SavePassword.IsChecked = true;
                 }
             }
-            
-            TitleStr = InitTitlestr;
-            reply_msg = "";
-
         }
         ~LoginControl()
         {
@@ -61,13 +63,15 @@ namespace NJULoginTest
                 case Pages.GetInfo:
                 case Pages.LoginPage:
                     ServiceName = "";
+                    LoginUsername = "";
                     reply_msg = HArgs.reply_msg;
                     switch (HArgs.ReturnCodeMeaning)
                     {
                         case ReturnDataCodeMeaning.Success:
-                            CurrentState = LoginUIState.LoggedIn;
+                            LoginUsername = HArgs.username;
+                            LoginUserInfo = HArgs.fullname + "(" + HArgs.username + ")";
                             ServiceName = HArgs.service_name;
-                            if(PageType == Pages.LoginPage)
+                            if (PageType == Pages.LoginPage)
                                 if ((SavePassword.IsChecked.HasValue ? SavePassword.IsChecked.Value : false))
                                 {
                                     UINFOSaver.Save(Username, Password);
@@ -76,6 +80,7 @@ namespace NJULoginTest
                                 {
                                     UINFOSaver.Delete();
                                 }
+                            CurrentState = LoginUIState.LoggedIn;
                             break;
                         case ReturnDataCodeMeaning.NoNetWork:
                             CurrentState = LoginUIState.NoNetwork;
@@ -95,6 +100,7 @@ namespace NJULoginTest
                 case Pages.LogoutPage:
                     reply_msg = HArgs.reply_msg;
                     ServiceName = "";
+                    LoginUsername = "";
                     switch (HArgs.ReturnCodeMeaning)
                     {
                         case ReturnDataCodeMeaning.Success:
@@ -116,6 +122,20 @@ namespace NJULoginTest
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private string loginusername;
+        public string LoginUsername
+        {
+            get { return loginusername; }
+            set { loginusername = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LoginUsername))); }
+        }
+
+        private string loginuserinfo;
+        public string LoginUserInfo
+        {
+            get { return loginuserinfo; }
+            set { loginuserinfo = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LoginUserInfo))); }
+        }
 
         private string replymsg;
         public string reply_msg

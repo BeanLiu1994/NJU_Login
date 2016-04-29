@@ -104,6 +104,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DownPic.cs" />
+    <Compile Include="EasterEggPage.xaml.cs">
+      <DependentUpon>EasterEggPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,7 @@
     <Compile Include="ShowSettings.xaml.cs">
       <DependentUpon>ShowSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimeChecker.cs" />
     <Compile Include="WindowBL.xaml.cs">
       <DependentUpon>WindowBL.xaml</DependentUpon>
     </Compile>
@@ -159,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="EasterEggPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -53,7 +53,7 @@
                         <Setter Target="StatePanel.Visibility" Value="Visible" />
                         <Setter Target="SavePassword.Visibility" Value="Collapsed" />
                         <Setter Target="UserState.Text" Value="{x:Bind Path=reply_msg,Mode=OneWay}" />
-                        <Setter Target="SystemState.Text" Value=" " />
+                        <Setter Target="SystemState.Text" Value="{x:Bind Path=LoginUserInfo,Mode=OneWay}" />
                         <Setter Target="UserState.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                         <Setter Target="SystemState.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                         <Setter Target="ActButton.IsEnabled" Value="True" />
@@ -111,8 +111,8 @@
             <!-- text之后绑定到其他位置 -->
             <Grid>
                 <StackPanel Name="StatePanel" Visibility="Collapsed">
-                    <TextBox Name="UserState" Style="{StaticResource StateTextStyle}"/>
                     <TextBox Name="SystemState" Style="{StaticResource StateTextStyle}"/>
+                    <TextBox Name="UserState" Style="{StaticResource StateTextStyle}"/>
                 </StackPanel>
                 <StackPanel Name="InputPanel">
                     <TextBox Name="Input_Username" Text="{x:Bind Path=Username,Mode=TwoWay}" KeyDown="KeyPress" Style="{StaticResource UsernameStyle}"/>

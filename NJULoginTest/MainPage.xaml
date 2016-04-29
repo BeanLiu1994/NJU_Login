@@ -72,6 +72,7 @@
                     <StackPanel>
                         <Frame Name="LoginPage"/>
                         <Frame Name="InfoPage"/>
+                        <Frame Name="EasterPage"/>
                     </StackPanel>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>

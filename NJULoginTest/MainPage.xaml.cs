@@ -38,6 +38,7 @@ namespace NJULoginTest
             LoginPage.Navigate(typeof(ShowLogin));
             AboutPage.Navigate(typeof(ShowAbout));
             NoticePage.Navigate(typeof(ShowNotice));
+            EasterPage.Navigate(typeof(EasterEggPage));
             SettingPage.Navigate(typeof(ShowSettings));
         }
         ~MainPage()
@@ -67,10 +68,11 @@ namespace NJULoginTest
             }
         }
 
+        private TimeChecker myChecker30Min = new TimeChecker(new TimeSpan(0, 30, 0));
         public async Task RefreshPic()
         {
-            var profile = NetworkInformation.GetInternetConnectionProfile();
-            if (profile.IsWwanConnectionProfile) return;
+            if (!myChecker30Min.Check()) return;
+            if (NetworkCheck.IsWwanConnectionNow()) return;
             var mypicinfo = new PictureInfo();
             PicInfoShowing = await mypicinfo.RunSession();
             if (PicInfoShowing != null)
