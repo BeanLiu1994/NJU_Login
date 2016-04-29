@@ -25,6 +25,7 @@ namespace NJULoginTest
     {
         private UserPassSaver_Roam UINFOSaver;
         public static LoginControl Current;
+        private const string InitTitlestr = "登入登出";
         public LoginControl()
         {
             Current = this;
@@ -43,7 +44,7 @@ namespace NJULoginTest
                 }
             }
             
-            TitleStr = "Login || Logout";
+            TitleStr = InitTitlestr;
             reply_msg = "";
 
         }
@@ -66,14 +67,15 @@ namespace NJULoginTest
                         case ReturnDataCodeMeaning.Success:
                             CurrentState = LoginUIState.LoggedIn;
                             ServiceName = HArgs.service_name;
-                            if ((SavePassword.IsChecked.HasValue ? SavePassword.IsChecked.Value : false))
-                            {
-                                UINFOSaver.Save(Username, Password);
-                            }
-                            else
-                            {
-                                UINFOSaver.Delete();
-                            }
+                            if(PageType == Pages.LoginPage)
+                                if ((SavePassword.IsChecked.HasValue ? SavePassword.IsChecked.Value : false))
+                                {
+                                    UINFOSaver.Save(Username, Password);
+                                }
+                                else
+                                {
+                                    UINFOSaver.Delete();
+                                }
                             break;
                         case ReturnDataCodeMeaning.NoNetWork:
                             CurrentState = LoginUIState.NoNetwork;
@@ -195,7 +197,7 @@ namespace NJULoginTest
                     }
                     else if(!PrompLogout)
                     {
-                        TitleStr = "Login || Logout";
+                        TitleStr = InitTitlestr;
                         PrompLogout = true;
                     }
                     if (PrompLogout)

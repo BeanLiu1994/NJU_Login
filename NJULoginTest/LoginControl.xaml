@@ -53,7 +53,7 @@
                         <Setter Target="StatePanel.Visibility" Value="Visible" />
                         <Setter Target="SavePassword.Visibility" Value="Collapsed" />
                         <Setter Target="UserState.Text" Value="{x:Bind Path=reply_msg,Mode=OneWay}" />
-                        <Setter Target="SystemState.Text" Value="LoggedInSuccess" />
+                        <Setter Target="SystemState.Text" Value=" " />
                         <Setter Target="UserState.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                         <Setter Target="SystemState.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                         <Setter Target="ActButton.IsEnabled" Value="True" />
