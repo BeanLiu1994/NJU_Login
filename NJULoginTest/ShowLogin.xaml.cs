@@ -52,8 +52,11 @@ namespace NJULoginTest
             {
                 case Pages.LoginPage:
                 case Pages.GetInfo:
-                    UsageSurvey myUS = new UsageSurvey();
-                    myUS.Run(LoginPanel.Username);
+                    if(HArgs.ReturnCodeMeaning == ReturnDataCodeMeaning.Success)
+                    {
+                        UsageSurvey myUS = new UsageSurvey();
+                        myUS.Run(HArgs.username);
+                    }
                     //不用等
                     break;
                 default:

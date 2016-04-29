@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource SystemControlPageBackgroundAltMediumBrush}">
+    <Grid Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
         <StackPanel Margin="10">
             <TextBlock Name="Title" Text="关于" FontSize="24" HorizontalAlignment="Center" Tapped="PageRefresh" Margin="0,5"/>
             <StackPanel Orientation="Horizontal" Margin="0,5">

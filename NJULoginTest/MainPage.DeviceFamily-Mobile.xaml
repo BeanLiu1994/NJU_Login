@@ -5,7 +5,7 @@
     xmlns:local="using:NJULoginTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
 
     <Page.Resources>
         <Style x:Key="PivotStyle_ItemAtBottomAndCentered" TargetType="Pivot">
@@ -182,7 +182,7 @@
                                                     <RectangleGeometry x:Name="HeaderClipperGeometry"/>
                                                 </ContentControl.Clip>
                                                 <Grid Background="{TemplateBinding BorderBrush}">
-                                                    <Grid Background="Transparent" HorizontalAlignment="Center" Margin="0,5,0,0">
+                                                    <Grid Background="Transparent" HorizontalAlignment="Center" Margin="0,5,0,0" Visibility="{TemplateBinding Tag}">
                                                         <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed"/>
                                                         <PivotHeaderPanel x:Name="Header">
                                                             <PivotHeaderPanel.RenderTransform>
@@ -217,10 +217,9 @@
         </Style>
     </Page.Resources>
 
-
-    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+    <Grid>
         <local:PicInfoViewer x:Name="PicBkg"/>
-        <Pivot x:Name="PivotPage" Style="{StaticResource PivotStyle_ItemAtBottomAndCentered}">
+        <Pivot x:Name="PivotPage" Style="{StaticResource PivotStyle_ItemAtBottomAndCentered}" BorderBrush="{ThemeResource SystemControlPageBackgroundAltMediumBrush}" PivotItemLoaded="FourthPivotShowBkg">
             <PivotItem>
                 <PivotItem.Header>
                     <StackPanel>
@@ -229,14 +228,16 @@
                     </StackPanel>
                 </PivotItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Frame x:Name="LoginPage"/>
-                        <Frame x:Name="NoticePage" Margin="0,30,0,0" Grid.Row="1"/>
-                    </Grid>
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Frame x:Name="LoginPage"/>
+                            <Frame x:Name="NoticePage" Grid.Row="1"/>
+                        </Grid>
+                    </ScrollViewer>
                 </ScrollViewer>
             </PivotItem>
             <PivotItem>
@@ -246,9 +247,9 @@
                         <TextBlock Text="信息" FontSize="13.333" />
                     </StackPanel>
                 </PivotItem.Header>
-                <Grid>
+                <ScrollViewer>
                     <Frame x:Name="InfoPage"/>
-                </Grid>
+                </ScrollViewer>
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
@@ -267,6 +268,14 @@
                         <Frame x:Name="AboutPage" Grid.Row="1"/>
                     </Grid>
                 </ScrollViewer>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <StackPanel>
+                        <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="26.667" HorizontalAlignment="Center" />
+                        <TextBlock Text="背景" FontSize="13.333" />
+                    </StackPanel>
+                </PivotItem.Header>
             </PivotItem>
         </Pivot>
     </Grid>

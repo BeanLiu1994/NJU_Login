@@ -78,5 +78,19 @@ namespace NJULoginTest
         {
             await RefreshPic();
         }
+
+        private void FourthPivotShowBkg(Pivot sender, PivotItemEventArgs args)
+        {
+            if(PivotPage.SelectedIndex == 3)
+            {
+                PicBkg.ShowInfo();
+                PivotPage.Tag = Visibility.Collapsed;
+            }
+            else
+            {
+                PicBkg.HideInfo();
+                PivotPage.Tag = Visibility.Visible;
+            }
+        }
     }
 }

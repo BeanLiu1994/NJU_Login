@@ -30,6 +30,10 @@ namespace NJULoginTest
         {
             VisualStateManager.GoToState(this, "W860", true);
         }
+        public void HideInfo()
+        {
+            VisualStateManager.GoToState(this, "W0", true);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
