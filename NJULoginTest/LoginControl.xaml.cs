@@ -36,6 +36,7 @@ namespace NJULoginTest
             LoginUserInfo = "";
             Username = "";
             Password = "";
+            CurrentState = LoginUIState.Waiting;
 
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += LoginInfoDataHandler;
             UINFOSaver = new UserPassSaver_Roam();
@@ -193,6 +194,7 @@ namespace NJULoginTest
         }
         public async void PageRefresh()
         {
+            CurrentState = LoginUIState.Waiting;
             await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
         }
         private bool PrompLogout = true;

@@ -161,12 +161,12 @@ namespace LoggingSystem
                 var InfoCheck = (CheckerConfig)serializer.ReadObject(mStream);
                 ReplyType = CodeMeaningTranslate((ReplyCodeMeaning)InfoCheck.reply_code);
             }
-            if (ReplyType == ReturnDataCodeMeaning.Fail) 
-                RecentInfo = await Fetcher.PostToUrl_WithPagesSelector(DestPage,"?username="+username+"&password="+password);
-            else if(ReplyType == ReturnDataCodeMeaning.NoNetWork)
+            if (ReplyType == ReturnDataCodeMeaning.Fail)
+                RecentInfo = await Fetcher.PostToUrl_WithPagesSelector(DestPage, username, password);
+            else if (ReplyType == ReturnDataCodeMeaning.NoNetWork)
                 RecentInfo = "";
-            else if(ReplyType == ReturnDataCodeMeaning.Success)
-                RecentInfo = await Fetcher.PostToUrl_WithPagesSelector(DestPage, "?username=1&password=1");
+            else if (ReplyType == ReturnDataCodeMeaning.Success)
+                RecentInfo = await Fetcher.PostToUrl_WithPagesSelector(DestPage, "1", "1");
             return RecentInfo;
         }
         protected override bool HandleRecentInfo()

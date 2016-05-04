@@ -26,11 +26,11 @@ namespace LoggingSystem
     {
         public IDataFetcher() { Init(); }
         public abstract void Init();
-        public abstract Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string additional_string = "");
+        public abstract Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string _username = "", string _password = "");
 
         //网络访问方法 封装访问实现细节
         //想用 Windows.Web.Http 的话不用改代码,直接替换System.Net.Http
-        protected async Task<string> PostToUrl(string url)
+        protected async Task<string> PostToUrl(string url, HttpContent content = null)
         {
             string result = "";
             var cts = new CancellationTokenSource();
@@ -38,7 +38,7 @@ namespace LoggingSystem
             try
             {
                 HttpClient myHC = new HttpClient();
-                HttpResponseMessage response = await myHC.PostAsync(new Uri(url), null, cts.Token);
+                HttpResponseMessage response = await myHC.PostAsync(new Uri(url), content, cts.Token);
                 result = await response.Content.ReadAsStringAsync();
             }
             catch (TaskCanceledException e)
@@ -89,10 +89,23 @@ namespace LoggingSystem
 
         #region Post方法
         //Debug在此处进行切换 将debug变化封装
-        public override async Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string additional_string = "")
+        public override async Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string _username = "", string _password = "")
         {
             int SiteSelector = (int)PageIndex;
-            return await PostToUrl(PageURLs[SiteSelector] + additional_string);
+            if (_username == null || _password == null)
+            {
+                _username = "";
+                _password = "";
+            }
+            if (_username == "" || _password == "")
+                return await PostToUrl(PageURLs[SiteSelector]);
+            else
+            {
+                var username = new KeyValuePair<string, string>("username", _username);
+                var password = new KeyValuePair<string, string>("password", _password);
+                var form = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() { username, password });
+                return await PostToUrl(PageURLs[SiteSelector], form);
+            }
         }
         #endregion
         #region 保存接收的信息
@@ -108,7 +121,7 @@ namespace LoggingSystem
                 switch (temp)
                 {
                     case Pages.LoginPage:
-                        content = await PostToUrl_WithPagesSelector(temp, @"?username=" + username + @"&password=" + password); ;
+                        content = await PostToUrl_WithPagesSelector(temp, username, password); ;
                         if (content.Length == 0) break; ;//说明没网,不继续这一个了
                         Allcontent += "\t" + temp.ToString() + ":" + content.RemoveEnter() + ",\n";
                         break;
@@ -140,7 +153,8 @@ namespace LoggingSystem
             catch (Exception e) { Debug.WriteLine("将创建文件OfflineDebuggingContent.txt"); }
 
             StorageFile ContentFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("OfflineDebuggingContent.txt");
-            try { 
+            try
+            {
                 using (Stream stream = await ContentFile.OpenStreamForWriteAsync())
                 {
                     byte[] content_b = Encoding.UTF8.GetBytes(Allcontent);
@@ -150,7 +164,7 @@ namespace LoggingSystem
             }
             catch (Exception e) { Debug.WriteLine("未能成功写入文件"); }
             try
-            { 
+            {
                 DataPackage pv = new DataPackage();
                 pv.SetText(ContentFile.Path);
                 Clipboard.SetContent(pv);
@@ -231,7 +245,7 @@ namespace LoggingSystem
         #endregion
         #endregion
         #region Post方法
-        public override async Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string additional_string = "")
+        public override async Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string _username = "", string _password = "")
         {
             int SiteSelector = (int)PageIndex;
             await Task.Delay(500);//延时0.5s 保证返回类型一致 有网络延迟感
