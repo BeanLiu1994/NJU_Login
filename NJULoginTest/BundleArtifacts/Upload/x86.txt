@@ -1,1 +1,1 @@
-MainPackage=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\x86\Release\Upload\NJULoginTest_1.3.0.0_x86.appx
+MainPackage=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\x86\Release\Upload\NJULoginTest_1.3.3.0_x86.appx
