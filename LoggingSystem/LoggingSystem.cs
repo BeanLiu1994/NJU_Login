@@ -41,9 +41,7 @@ namespace LoggingSystem
                 ChangeFetcher(new DataFetcher_Test());
             else
                 ChangeFetcher(new DataFetcher());
-
-            //不等待的刷新notice  不过好像不必放在这里 只要保证其他位置调用时刷新就行
-            //RunConcreteUser(Pages.GetNotice);
+            
         }
 
         public async Task<bool> RefreshLoginSession(bool IsNetworkStateChangeTrigger)

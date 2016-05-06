@@ -220,13 +220,15 @@ namespace TileRefresh
                 {
                     StateChecker_Result[(int)check_enum.uinfo_checker] = false;
                     StateChecker_Result[(int)check_enum.volume_checker] = false;
-                    LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
+                    if (StateChecker_Result[(int)check_enum.notice_checker] == null)
+                        LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
                     //这里是真的不用去等待
                 }
                 else if (PageType == Pages.GetVolume)
                 {
                     StateChecker_Result[(int)check_enum.volume_checker] = false;
-                    LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
+                    if (StateChecker_Result[(int)check_enum.notice_checker] == null)
+                        LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
                     //这里是真的不用去等待
                 }
             }

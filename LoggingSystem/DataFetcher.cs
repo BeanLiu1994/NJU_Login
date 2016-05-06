@@ -28,6 +28,11 @@ namespace LoggingSystem
         public abstract void Init();
         public abstract Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string _username = "", string _password = "");
 
+        public async Task<string> PostToUrl_Form(string url, IEnumerable<KeyValuePair<string,string>> form)
+        {
+            return await PostToUrl(url, new FormUrlEncodedContent(form));
+        }
+
         //网络访问方法 封装访问实现细节
         //想用 Windows.Web.Http 的话不用改代码,直接替换System.Net.Http
         protected async Task<string> PostToUrl(string url, HttpContent content = null)
@@ -103,8 +108,8 @@ namespace LoggingSystem
             {
                 var username = new KeyValuePair<string, string>("username", _username);
                 var password = new KeyValuePair<string, string>("password", _password);
-                var form = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() { username, password });
-                return await PostToUrl(PageURLs[SiteSelector], form);
+                var form = new List<KeyValuePair<string, string>>() { username, password };
+                return await PostToUrl_Form(PageURLs[SiteSelector], form);
             }
         }
         #endregion

@@ -73,11 +73,11 @@ namespace NJULoginTest
             if (LoginControl.Current != null)
             {
                 Uname = LoginControl.Current.Username;
-            }
-            bool Runresult = await myAMF.Run(Uname);
-            if (Runresult)
-            {
-                mydata.Add(new DataType_ShowInfo() { Title = myAMF.result_Analysed.Title, Content = myAMF.result_Analysed.Content, Url = myAMF.result_Analysed.url });
+                bool Runresult = await myAMF.Run(Uname);
+                if (Runresult)
+                {
+                    mydata.Add(new DataType_ShowInfo() { Title = myAMF.result_Analysed.Title, Content = myAMF.result_Analysed.Content, Url = myAMF.result_Analysed.url });
+                }
             }
         }
         
