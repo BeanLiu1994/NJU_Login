@@ -1,2 +1,2 @@
-MainPackage=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\ARM\Release\Upload\NJULoginTest_1.3.7.0_ARM.appx
+MainPackage=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\ARM\Release\Upload\NJULoginTest_1.3.9.0_ARM.appx
 ResourcePack=C:\Users\njuee\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\_scale-125.appx
