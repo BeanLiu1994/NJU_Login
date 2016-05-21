@@ -26,6 +26,7 @@ namespace LoggingSystem
     {
         public IDataFetcher() { Init(); }
         public abstract void Init();
+        public virtual string Enum2Url(Pages input) { return ""; }
         public abstract Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string _username = "", string _password = "");
 
         public async Task<string> PostToUrl_Form(string url, IEnumerable<KeyValuePair<string,string>> form)
@@ -71,6 +72,7 @@ namespace LoggingSystem
         }
         #region URL初始化
         private string[] PageURLs = null;
+        public override string Enum2Url(Pages input) { return PageURLs[(int)input]; }
         private void InitURLs()
         {
             PageURLs = new string[(int)Pages.TopNum];

@@ -38,6 +38,8 @@ namespace LoggingSystem
         public TimeSpan onlineTimeSpan { get; set; }
         public string onlineTime { get; set; }
         public int month { get; set; }
+        //billinfo
+        public Bill.BillContainer[] Bills { get; set; }
     }
     public enum ReturnDataCodeMeaning
     {
@@ -696,6 +698,118 @@ namespace LoggingSystem
             public long user_id { get; set; }
             [DataMember(Order = 16)]
             public string username { get; set; }
+        }
+        #endregion
+    }
+    #endregion
+
+    #region BillPart
+    public class Bill : GetJSON
+    {
+        public Bill()
+        {
+            DestPage = Pages.GetBill;
+        }
+        protected async override Task<string> RunPostSession()
+        {
+            RecentInfo = await Fetcher.PostToUrl_Form(Fetcher.Enum2Url(DestPage),new List<KeyValuePair<string,string>>() { new KeyValuePair<string,string>("rows","1000") });
+            return RecentInfo;
+        }
+        protected override bool HandleRecentInfo()
+        {
+            if (RecentInfo.Length == 0)
+            {
+                UserConfig = new BillConfig();
+                UserConfig.reply_code = (int)ReplyCodeMeaning.NoNetWork;
+                UserConfig.reply_msg = "没有校园网";
+                Debug.WriteLine(UserConfig.reply_msg);
+                return false;
+            }
+            else
+            {
+                //如果有返回信息
+                var serializer = new DataContractJsonSerializer(typeof(BillConfig));
+                var mStream = new MemoryStream(Encoding.UTF8.GetBytes(RecentInfo));
+                try
+                {
+                    UserConfig = (BillConfig)serializer.ReadObject(mStream);
+                }
+                catch (Exception e)
+                {
+                    UserConfig = new BillConfig();
+                    UserConfig.reply_code = (int)ReplyCodeMeaning.OtherFail;
+                    UserConfig.reply_msg = "数据分析失败";
+                    Debug.WriteLine(UserConfig.reply_msg);
+                    return false;
+                }
+
+                if (UserConfig.total >= 0 && UserConfig.rows != null)
+                {
+                    UserConfig.reply_code = (int)ReplyCodeMeaning.QuerySucceed;
+                    UserConfig.reply_msg = "获取成功!";
+                    Debug.WriteLine(UserConfig.reply_msg);
+                    return true;
+                }
+                else
+                {
+                    UserConfig.reply_code = (int)ReplyCodeMeaning.OtherFail;
+                    UserConfig.reply_msg = "数据分析失败";
+                    Debug.WriteLine(UserConfig.reply_msg);
+                    return false;
+                }
+            }
+        }
+        public override ReturnData GetRecentInfo()
+        {
+            ReturnData PreparedInfo = new ReturnData()
+            {
+                reply_code = (ReplyCodeMeaning)UserConfig.reply_code,
+                reply_msg = UserConfig.reply_msg,
+                ReturnCodeMeaning = CodeMeaningTranslate((ReplyCodeMeaning)UserConfig.reply_code)
+            };
+            if (PreparedInfo.ReturnCodeMeaning == ReturnDataCodeMeaning.Success)
+            {
+                PreparedInfo.Bills = UserConfig.rows;
+            }
+            return PreparedInfo;
+        }
+
+        BillConfig UserConfig;
+        #region BillConfig Contract
+        // Bill Infomation
+        [DataContract(Namespace = "http://p.nju.edu.cn")]
+        private class BillConfig
+        {
+            [DataMember(Order = 0)]
+            public int total { get; set; }
+            [DataMember(Order = 1)]
+            public string reply_msg { get; set; }
+            [DataMember(Order = 2)]
+            public BillContainer[] rows { get; set; }
+            [DataMember(Order = 3)]
+            public int reply_code { get; set; }
+        }
+        [DataContract(Namespace = "http://p.nju.edu.cn")]
+        public class BillContainer
+        {
+            [DataMember(Order = 0)]
+            public long id { get; set; }
+            [DataMember(Order = 1)]
+            public string account_no { get; set; }
+            [DataMember(Order = 2)]
+            public int recharge_amount { get; set; }
+            [DataMember(Order = 3)]
+            public long beginning_balance { get; set; }
+            [DataMember(Order = 4)]
+            public long ending_balance { get; set; }
+            [DataMember(Order = 5)]
+            public long costs_amount { get; set; }
+            [DataMember(Order = 6)]
+            public long startdate { get; set; }
+            [DataMember(Order = 7)]
+            public long enddate { get; set; }
+            [DataMember(Order = 8)]
+            public long createtime { get; set; }
         }
         #endregion
     }
