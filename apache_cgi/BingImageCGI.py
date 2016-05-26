@@ -29,7 +29,7 @@ def pic_download(IsDownLoadEnabled):
 		f.close()
 	return r"http://visg.nju.edu.cn:16043/" + filename
 
-def info_comp(InfoGet):
+def load_data():
 	infoname = "E:\\Server\\BingImageInfo.txt"
 	if os.path.exists(infoname):
 		finfo = open(infoname,"r")
@@ -37,6 +37,12 @@ def info_comp(InfoGet):
 		finfo.close()
 	else:
 		info=""
+	return info
+	
+def info_comp(InfoGet):
+	infoname = "E:\\Server\\BingImageInfo.txt"
+	
+	info=load_data()
 		
 	finfo = open(infoname,"w")
 	finfo.write(InfoGet)
@@ -46,12 +52,15 @@ def info_comp(InfoGet):
 	
 def http_get():
 	url='http://cn.bing.com/cnhp/coverstory/'   #页面的地址
-	response = urllib2.urlopen(url)         #调用urllib2向服务器发送get请求
-	InfoGet=response.read()
+	try:
+		response = urllib2.urlopen(url, data=None, timeout=3)         #调用urllib2向服务器发送get请求
+		InfoGet=response.read()
+		response.close()
+	except Exception,e:
+		InfoGet=''
 	if len(InfoGet)==0:
-		return ""
+		InfoGet=load_data()
 	mydata = json.loads(InfoGet,object_pairs_hook=OrderedDict)
-	response.close()
 	comp_result=info_comp(InfoGet)
 	pic_url=pic_download(not comp_result)
 	dataout={'title':mydata['title'],'url':pic_url,'desc':mydata['para1']+mydata['para2'],'copyrightinfo':mydata['provider']+u'  © Microsoft'}
