@@ -1,1 +1,1 @@
-C:\Users\njuee_kgom\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\AppPackages\NJULoginTest_1.3.10.0\NJULoginTest_1.3.10.0_x86_x64_arm.appxbundle
+C:\Users\njuee_kgom\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\AppPackages\NJULoginTest_1.3.12.0\NJULoginTest_1.3.12.0_x86_x64_arm.appxbundle
