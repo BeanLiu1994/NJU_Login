@@ -59,7 +59,7 @@ namespace LoggingSystem
                     {
                         RegisterFetcherUser(new Login(username, password));
                         await RunConcreteUser(Pages.LoginPage);
-                        await Task.Delay(200);
+                        await Task.Delay(1000);
                         Debug.WriteLine("已尝试自动登录");
                     }
             }

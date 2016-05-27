@@ -179,10 +179,12 @@ namespace NJULoginTest
             }
         }
 
+        private LoginUIState nextState = LoginUIState.Normal;
         private async void StateSwitch(LoginUIState dest_state)
         {
+            nextState = dest_state;
             while (!InitializeComponent_finished) await Task.Delay(500);
-            VisualStateManager.GoToState(this, dest_state.ToString(), true);
+            VisualStateManager.GoToState(this, nextState.ToString(), true);
         }
 
         public async Task Login()
