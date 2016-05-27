@@ -40,7 +40,7 @@ namespace LoggingSystem
         {
             string result = "";
             var cts = new CancellationTokenSource();
-            cts.CancelAfter(TimeSpan.FromSeconds(2.5));//设置延时时间2.5s
+            cts.CancelAfter(TimeSpan.FromSeconds(1.5));//设置延时时间2.5s
             try
             {
                 HttpClient myHC = new HttpClient();

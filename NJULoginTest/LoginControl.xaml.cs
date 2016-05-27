@@ -26,6 +26,7 @@ namespace NJULoginTest
         private UserPassSaver_Roam UINFOSaver;
         public static LoginControl Current;
         private const string InitTitlestr = "登入登出";
+        private bool InitializeComponent_finished = false;
         public LoginControl()
         {
             Current = this;
@@ -178,8 +179,9 @@ namespace NJULoginTest
             }
         }
 
-        private void StateSwitch(LoginUIState dest_state)
+        private async void StateSwitch(LoginUIState dest_state)
         {
+            while (!InitializeComponent_finished) await Task.Delay(500);
             VisualStateManager.GoToState(this, dest_state.ToString(), true);
         }
 
@@ -246,6 +248,11 @@ namespace NJULoginTest
         private void Title_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PageRefresh();
+        }
+
+        private void ThisControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitializeComponent_finished = true;
         }
     }
     public enum LoginUIState
