@@ -116,6 +116,9 @@
     <Compile Include="PicInfoViewer.xaml.cs">
       <DependentUpon>PicInfoViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PointsChartDraw.xaml.cs">
+      <DependentUpon>PointsChartDraw.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowAbout.xaml.cs">
       <DependentUpon>ShowAbout.xaml</DependentUpon>
@@ -183,6 +186,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PicInfoViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PointsChartDraw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

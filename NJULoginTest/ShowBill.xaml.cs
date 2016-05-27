@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -47,36 +48,24 @@ namespace NJULoginTest
         }
         private void BillRefresh_ReturnDataEvent(LoggingSystem.Pages PageType, bool Hresult, LoggingSystem.ReturnData HArgs)
         {
-            if(PageType== Pages.GetBill)
+            if (PageType == Pages.GetBill)
             {
-                PointsSource.Clear();
                 switch (HArgs.ReturnCodeMeaning)
                 {
                     case ReturnDataCodeMeaning.Success:
+                        PointsSource.Clear();
                         foreach (var m in HArgs.Bills)
                         {
                             var X_span = new DateTime(((DateTime.Today - timetool(m.enddate)).Ticks));
-                            var X = (X_span.Year * 12 + X_span.Month)*20;
+                            var X = (X_span.Year * 12 + X_span.Month) * 20;
                             var Y = ((double)m.ending_balance / 1000);
-                            PointsSource.Add(new Point() { X = X, Y = Y});
-
-                            var thisrow = new TextBlock();
-                            string recharged = "没有充值";
-                            if (m.recharge_amount != 0)
-                                recharged = "充值了 [" + ((double)m.recharge_amount/1000).ToString() +"]";
-                            thisrow.Text = "[" + Notice.DistTime2String(m.startdate) + "] 到 [" +
-                                Notice.DistTime2String(m.enddate) + "] 时间段内,由 [" + 
-                                ((double)m.beginning_balance/1000).ToString() + "] 用到了 [" + ((double)m.ending_balance / 1000).ToString() + "] 期间" + 
-                                recharged                                
-                                ;
-                            BillInfo.Children.Add(thisrow);
+                            PointsSource.Add(new Point() { X = X, Y = Y });
                         }
+                        PointChart.PointsSource = PointsSource;
                         break;
                     case ReturnDataCodeMeaning.Fail:
                     case ReturnDataCodeMeaning.NoNetWork:
-                        var thisrowEr = new TextBlock();
-                        thisrowEr.Text = "Error Ocurred";
-                        BillInfo.Children.Add(thisrowEr);
+                        PointChart.Background = new SolidColorBrush(Colors.Crimson);
                         break;
                 }
             }

@@ -86,11 +86,15 @@ namespace NJULoginTest
             this.Resuming += OnResuming;
             RegisterWorks();
             LoggingSystem.LoggingSystem.HasWindow = true;
+        }
+
+        private void OnNetworkChanged()
+        {
             NetworkInformation.NetworkStatusChanged += async (object sener) =>
             {
                 await ShowLogin.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                     ShowLogin.Current.PageRefresh();
+                    ShowLogin.Current.PageRefresh();
                 });
             };
             NetworkInformation.NetworkStatusChanged += async (object sener) =>
@@ -107,7 +111,6 @@ namespace NJULoginTest
                     await MainPage.Current.RefreshPic();
                 });
             };
-
         }
 
         private async void RegisterWorks()
@@ -182,6 +185,8 @@ namespace NJULoginTest
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    OnNetworkChanged();
+                    //rootFrame.Navigate(typeof(ShowBill), e.Arguments);
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
