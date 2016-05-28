@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="NJULoginTest.OtherPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NJULoginTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+        <HyperlinkButton Content="当前在线"/>
+        <HyperlinkButton Content="账单信息"/>
+        <HyperlinkButton Content="认证信息"/>
+        <HyperlinkButton Content="详单信息"/>
+        <HyperlinkButton Content="充值信息"/>
+    </StackPanel>
+</Page>

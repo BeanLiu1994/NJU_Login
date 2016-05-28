@@ -113,6 +113,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OtherPage.xaml.cs">
+      <DependentUpon>OtherPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PicInfoViewer.xaml.cs">
       <DependentUpon>PicInfoViewer.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OtherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PicInfoViewer.xaml">
       <SubType>Designer</SubType>

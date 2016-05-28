@@ -71,6 +71,15 @@ namespace NJULoginTest
             }
         }
 
+        public void RefreshContentInTable(Bill.BillContainer[] input)
+        {
+            TableOfData.Children.Clear();
+            foreach(var m in input)
+            {
+
+            }
+        }
+
         public async void PageRefresh()
         {
             await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetBill);

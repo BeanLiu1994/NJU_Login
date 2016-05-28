@@ -11,7 +11,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="余额变动" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="RefreshPage"/>
+        <TextBlock Text="账单信息" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="RefreshPage"/>
         <local:PointsChartDraw x:Name="PointChart" Margin="5" Grid.Row="1"/>
+        <Grid Name="TableOfData">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
     </Grid>
 </Page>

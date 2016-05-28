@@ -278,7 +278,7 @@
                 <PivotItem.Header>
                     <StackPanel>
                         <TextBlock Text="&#xE7A8;" FontFamily="Segoe MDL2 Assets" FontSize="26.667" HorizontalAlignment="Center" />
-                        <TextBlock Text="账单" FontSize="13.333" />
+                        <TextBlock Text="其他" FontSize="13.333" />
                     </StackPanel>
                 </PivotItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
