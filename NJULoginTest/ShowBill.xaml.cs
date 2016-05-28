@@ -40,7 +40,7 @@ namespace NJULoginTest
                 DateOfNotice = DateOfNotice.AddSeconds(u);
                 return DateOfNotice.ToString("yy-MM");
             };
-            PointChart.XYCount = new Size(4,3);
+            //PointChart.XYCount = new Size(4,3);
         }
         ~ShowBill()
         {

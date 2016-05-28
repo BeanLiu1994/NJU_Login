@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400" SizeChanged="SizeChanged_handler">
 
-    <Grid>
+    <Grid MinHeight="150" MinWidth="160" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -20,13 +20,13 @@
         </Grid.RowDefinitions>
         <TextBlock Name="YMax" VerticalAlignment="Top"/>
         <TextBlock Name="XMax" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"/>
-        <Grid Name="rootgrid" MinHeight="50" MinWidth="80" Grid.Column="1"/>
-        <Grid Name="YLabelGrid" RenderTransformOrigin="0.5,0.5">
+        <Grid Name="rootgrid" Grid.Column="1" Margin="0,8,8,0"/>
+        <Grid Name="YLabelGrid" RenderTransformOrigin="0.5,0.5" Margin="0,8,0,0">
             <Grid.RenderTransform>
                 <CompositeTransform TranslateY="12"/>
             </Grid.RenderTransform>
         </Grid>
-        <Grid Name="XLabelGrid" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+        <Grid Name="XLabelGrid" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Margin="0,0,8,0">
             <Grid.RenderTransform>
                 <CompositeTransform TranslateX="-12"/>
             </Grid.RenderTransform>
