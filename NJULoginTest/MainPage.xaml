@@ -18,6 +18,7 @@
                         <Setter Target="Window_1.Width" Value="300"/>
                         <Setter Target="Window_2.Width" Value="300"/>
                         <Setter Target="Window_3.Width" Value="300"/>
+                        <Setter Target="Window_5.Width" Value="300"/>
                         <Setter Target="Window_2.(RelativePanel.Below)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -29,6 +30,7 @@
                         <Setter Target="Window_1.Width" Value="480"/>
                         <Setter Target="Window_2.Width" Value="480"/>
                         <Setter Target="Window_3.Width" Value="480"/>
+                        <Setter Target="Window_5.Width" Value="480"/>
                         <Setter Target="Window_2.(RelativePanel.Below)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -40,8 +42,10 @@
                         <Setter Target="Window_1.Width" Value="380"/>
                         <Setter Target="Window_2.Width" Value="380"/>
                         <Setter Target="Window_3.Width" Value="380"/>
+                        <Setter Target="Window_5.Width" Value="380"/>
                         <Setter Target="Window_2.(RelativePanel.RightOf)" Value="Window_1"/>
                         <Setter Target="Window_3.(RelativePanel.RightOf)" Value="Window_1"/>
+                        <Setter Target="Window_5.(RelativePanel.RightOf)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="W1000">
@@ -52,8 +56,10 @@
                         <Setter Target="Window_1.Width" Value="480"/>
                         <Setter Target="Window_2.Width" Value="480"/>
                         <Setter Target="Window_3.Width" Value="480"/>
+                        <Setter Target="Window_5.Width" Value="480"/>
                         <Setter Target="Window_2.(RelativePanel.RightOf)" Value="Window_1"/>
                         <Setter Target="Window_3.(RelativePanel.RightOf)" Value="Window_1"/>
+                        <Setter Target="Window_5.(RelativePanel.RightOf)" Value="Window_1"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -94,6 +100,12 @@
                             </local:WindowBL>
                         </Grid>
                     </StackPanel>
+                </local:WindowBL.InnerContent>
+            </local:WindowBL>
+            <local:WindowBL x:Name="Window_5" Margin="10" MaxWidth="480" Title="BillChart"
+                            RelativePanel.Below="Window_3">
+                <local:WindowBL.InnerContent>
+                    <Frame Name="BillPage"/>
                 </local:WindowBL.InnerContent>
             </local:WindowBL>
         </RelativePanel>

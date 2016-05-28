@@ -34,18 +34,19 @@ namespace NJULoginTest
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += BillRefresh_ReturnDataEvent;
             PageRefresh();
             PointsSource = new PointCollection();
+            PointChart.XStringFormatFunc = (u) =>
+            {
+                DateTime DateOfNotice = new DateTime(1970, 1, 1, 8, 0, 0);
+                DateOfNotice = DateOfNotice.AddSeconds(u);
+                return DateOfNotice.ToString("yy-MM");
+            };
+            PointChart.XYCount = new Size(4,3);
         }
         ~ShowBill()
         {
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent -= BillRefresh_ReturnDataEvent;
         }
         private PointCollection PointsSource { get; set; } 
-        private DateTime timetool(long disttime)
-        {
-            DateTime DateOfNotice = new DateTime(1970, 1, 1, 8, 0, 0);
-            DateOfNotice = DateOfNotice.AddSeconds(disttime);
-            return DateOfNotice;
-        }
         private void BillRefresh_ReturnDataEvent(LoggingSystem.Pages PageType, bool Hresult, LoggingSystem.ReturnData HArgs)
         {
             if (PageType == Pages.GetBill)
@@ -56,8 +57,7 @@ namespace NJULoginTest
                         PointsSource.Clear();
                         foreach (var m in HArgs.Bills)
                         {
-                            var X_span = new DateTime(((DateTime.Today - timetool(m.enddate)).Ticks));
-                            var X = (X_span.Year * 12 + X_span.Month) * 20;
+                            var X = m.enddate;
                             var Y = ((double)m.ending_balance / 1000);
                             PointsSource.Add(new Point() { X = X, Y = Y });
                         }
@@ -77,7 +77,9 @@ namespace NJULoginTest
             Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }
 
-
-
+        private void RefreshPage(object sender, TappedRoutedEventArgs e)
+        {
+            PageRefresh();
+        }
     }
 }

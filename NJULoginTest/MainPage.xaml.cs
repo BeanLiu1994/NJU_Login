@@ -40,6 +40,7 @@ namespace NJULoginTest
             NoticePage.Navigate(typeof(ShowNotice));
             EasterPage.Navigate(typeof(EasterEggPage));
             SettingPage.Navigate(typeof(ShowSettings));
+            BillPage.Navigate(typeof(ShowBill));
         }
         ~MainPage()
         {

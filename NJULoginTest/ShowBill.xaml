@@ -5,9 +5,13 @@
     xmlns:local="using:NJULoginTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}">
-    <!--Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"-->
-    <Grid>
-        <local:PointsChartDraw x:Name="PointChart"/>
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="余额变动" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="RefreshPage"/>
+        <local:PointsChartDraw x:Name="PointChart" Margin="5" Grid.Row="1"/>
     </Grid>
 </Page>
