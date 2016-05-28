@@ -5,9 +5,9 @@
     xmlns:local="using:NJULoginTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="Black">
+    mc:Ignorable="d" Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}">
     <!--Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"-->
-    <StackPanel>
+    <Grid>
         <local:PointsChartDraw x:Name="PointChart"/>
-    </StackPanel>
+    </Grid>
 </Page>
