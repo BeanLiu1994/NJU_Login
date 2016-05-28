@@ -18,9 +18,19 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <TextBlock Name="YMax" VerticalAlignment="Top"/>
+        <TextBlock Name="XMax" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"/>
         <Grid Name="rootgrid" MinHeight="50" MinWidth="80" Grid.Column="1"/>
-        <Grid Name="YLabelGrid"/>
-        <Grid Name="XLabelGrid" Grid.Row="1" Grid.Column="1"/>
+        <Grid Name="YLabelGrid" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateY="12"/>
+            </Grid.RenderTransform>
+        </Grid>
+        <Grid Name="XLabelGrid" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateX="-12"/>
+            </Grid.RenderTransform>
+        </Grid>
     </Grid>
 
 </UserControl>

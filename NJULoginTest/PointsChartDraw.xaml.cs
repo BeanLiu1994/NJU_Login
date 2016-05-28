@@ -40,10 +40,10 @@ namespace NJULoginTest
 
             PointRange[0] = pointsource.Min(u => u.X);
             PointRange[1] = pointsource.Max(u => u.X);
-            if (PointRange[1] - PointRange[0] == 0) PointRange[1] = PointRange[0] + double.PositiveInfinity;
+            if (PointRange[1] - PointRange[0] == 0) PointRange[1] = PointRange[0] + 1;
             PointRange[2] = pointsource.Min(u => u.Y);
             PointRange[3] = pointsource.Max(u => u.Y);
-            if (PointRange[3] - PointRange[2] == 0) PointRange[3] = PointRange[2] + double.PositiveInfinity;
+            if (PointRange[3] - PointRange[2] == 0) PointRange[3] = PointRange[2] + 1;
 
             int YD = (int)(RenderSize.Height / HeightStep) + 1;
             int XD = (int)(RenderSize.Width / WidthStep) + 1;
@@ -56,7 +56,7 @@ namespace NJULoginTest
             line.HorizontalAlignment = HorizontalAlignment.Left;
             line.VerticalAlignment = VerticalAlignment.Bottom;
             //line.Stroke = Application.Current.Resources["SystemControlForegroundAccentBrush"] as SolidColorBrush;
-            line.Stroke = new SolidColorBrush(Colors.Aqua));
+            line.Stroke = new SolidColorBrush(Colors.Orchid);
             line.StrokeThickness = 3;
             double YP = RenderSize.Height / (PointRange[3] - PointRange[2]);
             double XP = RenderSize.Width / (PointRange[1] - PointRange[0]);
@@ -77,18 +77,6 @@ namespace NJULoginTest
                 var RowDef = new RowDefinition();
                 RowDef.Height = new GridLength(1, GridUnitType.Star);
                 rootgrid.RowDefinitions.Add(RowDef);
-                var RowDefYLabel = new RowDefinition();
-                RowDefYLabel.Height = new GridLength(1, GridUnitType.Star);
-                YLabelGrid.RowDefinitions.Add(RowDefYLabel);
-                var YLabelText = new TextBlock();
-                var TextValue = (PointRange[2] + YP * HeightStep * i);
-                if (TextValue > PointRange[3] + YP * HeightStep)
-                    YLabelText.Text = "";
-                else
-                    YLabelText.Text = TextValue.ToString("#0.0");
-                YLabelText.Foreground = Application.Current.Resources["SystemControlForegroundAccentBrush"] as SolidColorBrush;
-                Grid.SetRow(YLabelText, YD - 1 - i);
-                YLabelGrid.Children.Add(YLabelText);
                 if (i % 2 != 0)
                 {
                     var rect = new Rectangle();
@@ -97,7 +85,23 @@ namespace NJULoginTest
                     rect.Fill = Application.Current.Resources["SystemControlHighlightAltListAccentLowBrush"] as SolidColorBrush;
                     rootgrid.Children.Add(rect);
                 }
+
+                var RowDefYLabel = new RowDefinition();
+                RowDefYLabel.Height = new GridLength(1, GridUnitType.Star);
+                YLabelGrid.RowDefinitions.Add(RowDefYLabel);
+                var YLabelText = new TextBlock();
+                YLabelText.VerticalAlignment = VerticalAlignment.Bottom;
+                var TextValue = (PointRange[2] + HeightStep * i / YP);
+                if (TextValue > PointRange[3] + HeightStep / YP)
+                    YLabelText.Text = "";
+                else
+                    YLabelText.Text = TextValue.ToString("#0.00");
+                YLabelText.Foreground = Application.Current.Resources["SystemControlForegroundAccentBrush"] as SolidColorBrush;
+                Grid.SetRow(YLabelText, YD - 1 - i);
+                YLabelGrid.Children.Add(YLabelText);
             }
+            YMax.Text = (PointRange[2] + HeightStep * YD / YP).ToString("#0.00");
+            YMax.Foreground = Application.Current.Resources["SystemControlForegroundAccentBrush"] as SolidColorBrush;
 
             rootgrid.ColumnDefinitions.Clear();
             XLabelGrid.ColumnDefinitions.Clear();
@@ -111,11 +115,12 @@ namespace NJULoginTest
                 ColDefYLabel.Width = new GridLength(1, GridUnitType.Star);
                 XLabelGrid.ColumnDefinitions.Add(ColDefYLabel);
                 var XLabelText = new TextBlock();
-                var TextValue = (PointRange[0] + XP * WidthStep * i);
-                if (TextValue > PointRange[1] + XP * WidthStep)
+                XLabelText.HorizontalAlignment = HorizontalAlignment.Left;
+                var TextValue = (PointRange[0] + WidthStep * i / XP);
+                if (TextValue > PointRange[1] + WidthStep / XP)
                     XLabelText.Text = "";
                 else
-                    XLabelText.Text = TextValue.ToString("#0.0");
+                    XLabelText.Text = TextValue.ToString("#0");
                 XLabelText.Foreground = Application.Current.Resources["SystemControlForegroundAccentBrush"] as SolidColorBrush;
                 Grid.SetColumn(XLabelText, i);
                 XLabelGrid.Children.Add(XLabelText);
@@ -123,11 +128,12 @@ namespace NJULoginTest
                 var bord = new Border();
                 Grid.SetColumn(bord, i);
                 Grid.SetRowSpan(bord, YD);
-                bord.BorderThickness = new Thickness(1,0,1,0);
+                bord.BorderThickness = new Thickness(1,1,1,1);
                 bord.BorderBrush = Application.Current.Resources["SystemControlHighlightAltListAccentHighBrush"] as SolidColorBrush;
                 rootgrid.Children.Add(bord);
-
             }
+            XMax.Text = (PointRange[0] + WidthStep * XD / XP).ToString("#0");
+            XMax.Foreground = Application.Current.Resources["SystemControlForegroundAccentBrush"] as SolidColorBrush;
         }
         private Size PreviousSize = new Size(0, 0);
 
