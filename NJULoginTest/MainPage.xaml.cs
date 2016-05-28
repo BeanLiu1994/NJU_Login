@@ -87,7 +87,7 @@ namespace NJULoginTest
 
         private void FourthPivotShowBkg(Pivot sender, PivotItemEventArgs args)
         {
-            if(PivotPage.SelectedIndex == 3)
+            if(args.Item.Tag as string == "BackGround")
             {
                 PicBkg.ShowInfo();
                 PivotPage.Tag = Visibility.Collapsed;
