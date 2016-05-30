@@ -186,6 +186,7 @@ namespace NJULoginTest
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     OnNetworkChanged();
+                    rootFrame.Navigate(typeof(ShowBill), e.Arguments);
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();

@@ -10,18 +10,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="账单信息" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="RefreshPage"/>
-        <local:PointsChartDraw x:Name="PointChart" Margin="5" Grid.Row="1"/>
-        <Grid Name="TableOfData">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
+        <local:PointsChartDraw x:Name="PointChart" Margin="5" Grid.Row="2"/>
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <Grid Name="TableOfData">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>
