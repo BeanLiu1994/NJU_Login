@@ -35,7 +35,7 @@ namespace LoggingSystem
             ReturnDataEvent += Notice.FindIfNewNotice;
 
             SetConcreteUser(new Volume());
-            SetConcreteUser(new Bill());
+            //SetConcreteUser(new Bill());
 
             //Set Fetcher
             if (TestMode)

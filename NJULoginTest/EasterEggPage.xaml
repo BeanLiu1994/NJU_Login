@@ -6,16 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
-        <Canvas Opacity="0.4">
+    <Grid Background="{ThemeResource SystemControlHighlightListAccentLowBrush}" SizeChanged="Grid_SizeChanged">
+        <!--<Canvas Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Line X2="400" Y2="1000" Stroke="Red" 
+                  StrokeThickness="1200" StrokeDashArray="0.02 0.04"/>
+            <Line X2="400" Y2="1000" Stroke="Blue" 
+                  StrokeThickness="1200" StrokeDashArray="0.02 0.04" StrokeDashOffset="0.03"/>
             <Canvas.Clip>
                 <RectangleGeometry x:Name="ClipRectangle" Rect="0 0 0 0"/>
             </Canvas.Clip>
-            <Line X2="400" Y2="1000" Stroke="Red" 
-                  StrokeThickness="1000" StrokeDashArray="0.02 0.04"/>
-            <Line X2="400" Y2="1000" Stroke="Blue" 
-                  StrokeThickness="1000" StrokeDashArray="0.02 0.04" StrokeDashOffset="0.03"/>
-        </Canvas>
+        </Canvas>-->
         <RichTextBlock Margin="0,10" Name="EasterEggContainer" Tapped="RefreshContent" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

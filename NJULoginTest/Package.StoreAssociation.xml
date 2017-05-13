@@ -364,7 +364,8 @@
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
+    <MainPackageIdentityName>56225BeanLiu.14175B6F9F566</MainPackageIdentityName>
     <MainPackageIdentityName>56225BeanLiu.TVforwindowsstore</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5JDWG" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH5JDWG" />
 </StoreAssociation>

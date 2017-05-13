@@ -503,6 +503,13 @@ namespace LoggingSystem
                     Debug.WriteLine(UserConfig.reply_msg);
                     return true;
                 }
+                else if (UserConfig.total == 0)
+                {
+                    UserConfig.reply_code = (int)ReplyCodeMeaning.QuerySucceed;
+                    UserConfig.reply_msg = "暂时没有通知.";
+                    Debug.WriteLine(UserConfig.reply_msg);
+                    return true;
+                }
                 else
                 {
                     UserConfig.reply_code = (int)ReplyCodeMeaning.OtherFail;

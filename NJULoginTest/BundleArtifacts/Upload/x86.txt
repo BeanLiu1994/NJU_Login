@@ -1,1 +1,2 @@
-MainPackage=C:\Users\njuee_kgom\Documents\Visual Studio 2015\Projects\NJULoginTest\NJULoginTest\bin\x86\Release\Upload\NJULoginTest_1.3.12.0_x86.appx
+MainPackage=C:\Users\njuee\Documents\Visual Studio 2017\Projects\njulogintest\NJULoginTest\bin\x86\Release\Upload\NJULoginTest_1.3.18.0_x86.appx
+SymbolPackage=C:\Users\njuee\Documents\Visual Studio 2017\Projects\njulogintest\NJULoginTest\bin\x86\Release\Upload\NJULoginTest_1.3.18.0\NJULoginTest_1.3.18.0_x86.appxsym

@@ -11,11 +11,13 @@ namespace LoggingSystem
     {
         public static bool IsWwanConnectionNow()
         {
-            return NetworkInformation.GetInternetConnectionProfile().IsWwanConnectionProfile;
+            var Profile = NetworkInformation.GetInternetConnectionProfile();
+            return Profile != null && Profile.IsWwanConnectionProfile;
         }
         public static bool IsWlanConnectionNow()
         {
-            return NetworkInformation.GetInternetConnectionProfile().IsWlanConnectionProfile;
+            var Profile = NetworkInformation.GetInternetConnectionProfile();
+            return Profile != null && Profile.IsWlanConnectionProfile;
         }
     }
 }

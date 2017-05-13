@@ -19,6 +19,10 @@ namespace NJULoginTest
         {
             if (FirstDownTime.Year != DateTime.Today.Year) FirstDownTime = DateTime.Now;
             else NewQueryTime = DateTime.Now;
+            return Check_ReadOnly();
+        }
+        public bool Check_ReadOnly()
+        {
             if (NewQueryTime.Year == DateTime.Today.Year && (NewQueryTime - FirstDownTime) < RequestSpan)
                 return false;
             return true;

@@ -72,12 +72,15 @@ namespace NJULoginTest
         private TimeChecker myChecker30Min = new TimeChecker(new TimeSpan(0, 30, 0));
         public async Task RefreshPic()
         {
-            if (!myChecker30Min.Check()) return;
+            if (!myChecker30Min.Check_ReadOnly()) return;
             if (NetworkCheck.IsWwanConnectionNow()) return;
             var mypicinfo = new PictureInfo();
             PicInfoShowing = await mypicinfo.RunSession();
             if (PicInfoShowing != null)
+            {
                 PicBkg.InputPicInfo = PicInfoShowing;
+                myChecker30Min.Check();
+            }
         }
 
         private async void LoadedPage(object sender, RoutedEventArgs e)

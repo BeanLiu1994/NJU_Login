@@ -11,7 +11,7 @@
         <ToggleSwitch Name="ThemeSetting_UI" Header="主题" OffContent="亮色" OnContent="暗色" Margin="10" Toggled="ThemeSetter"/>
         <ToggleSwitch Name="AutoLoginSetting_UI" Header="自动登录(打开应用时)" OffContent="关" OnContent="开" Margin="10" Toggled="AutoLoginSetter"/>
         <ToggleSwitch Name="NetworkStateChangeLoginSetting_UI" Header="自动登录(网络变化时)" OffContent="关" OnContent="开" Margin="10" Toggled="NetworkStateChangeLoginSetter"/>
-        <ToggleSwitch Name="RefreshLoginSetting_UI" Header="自动登录(刷新磁贴时)" OffContent="关" OnContent="开" Margin="10" Toggled="RefreshLoginSetter"/>
+        <ToggleSwitch Name="RefreshLoginSetting_UI" Header="自动登录(刷新磁贴时_15Min)" OffContent="关" OnContent="开" Margin="10" Toggled="RefreshLoginSetter"/>
         <ToggleSwitch Name="TestModeSetting_UI" Header="测试模式" OffContent="关" OnContent="开" Margin="10" Toggled="TestModeSetter" Visibility="Collapsed"/>
     </StackPanel>
 </Page>
