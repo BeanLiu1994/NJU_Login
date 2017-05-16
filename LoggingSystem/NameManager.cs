@@ -35,6 +35,7 @@ namespace LoggingSystem
         public const string RefreshLoginSettingString = "RefreshLoginSetting";
         public const string TestModeSettingString = "TestModeSetting";
         public const string NetworkStateChangeLoginSettingString = "NetworkStateChangeLoginSetting";
+        public const string PrivacyUploadSettingString = "PrivacyUploadSettingString";
         #endregion
 
         public const string HTTPServerAddrPrefix = "http://visg.nju.edu.cn:16043";

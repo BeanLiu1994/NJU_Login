@@ -50,6 +50,7 @@ namespace NJULoginTest
         AutoLoginSetting MyAutoLoginSetting = new AutoLoginSetting();
         RefreshLoginSetting MyRefreshLoginSetting = new RefreshLoginSetting();
         NetworkStateChangeLoginSetting MyNetworkStateChangeLoginSetting = new NetworkStateChangeLoginSetting();
+        PrivacyUploadSetting MyPrivacyUploadSetting = new PrivacyUploadSetting();
         public ShowSettings()
         {
             Current = this;
@@ -69,6 +70,9 @@ namespace NJULoginTest
 
             MyNetworkStateChangeLoginSetting.LoadSetting();
             NetworkStateChangeLoginSetting_UI.IsOn = (MyNetworkStateChangeLoginSetting.State);
+
+            MyPrivacyUploadSetting.LoadSetting();
+            MyPrivacyUploadSetting_UI.IsOn = (MyPrivacyUploadSetting.State);
 
             Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }
@@ -152,6 +156,12 @@ namespace NJULoginTest
         public void ShowTestModeSetting()
         {
             TestModeSetting_UI.Visibility = Visibility.Visible;
+        }
+
+        private void MyPrivacyUploadSetting_UI_Toggled(object original_sender, RoutedEventArgs e)
+        {
+            var sender = original_sender as ToggleSwitch;
+            MyPrivacyUploadSetting.ApplySetting(sender.IsOn);
         }
     }
 }

@@ -17,7 +17,10 @@
                     <TextBlock Name="VersionOfApp"/>
                     <TextBlock Name="InstalledDateOfApp"/>
                 </StackPanel>
-                <Button Content="给我评价" Tapped="OpenReview" Margin="15"/>
+                <StackPanel>
+                    <Button Content="给我评价" Tapped="OpenReview" Margin="5"/>
+                    <Button Content="隐私策略" Tapped="Button_Tapped" Margin="5"/>
+                </StackPanel>
             </StackPanel>
             <TextBlock Text="说明" FontSize="24" HorizontalAlignment="Center" Margin="0,5"/>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">

@@ -61,5 +61,12 @@ namespace NJULoginTest
             await Windows.System.Launcher.LaunchUriAsync(uri);
             Debug.WriteLine("打开了商店页面");
         }
+
+        private async void Button_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var uri = new Uri("https://github.com/BeanLiu1994/NJU_Login/wiki/privacy_policy");
+            await Windows.System.Launcher.LaunchUriAsync(uri);
+            Debug.WriteLine("打开了商店页面");
+        }
     }
 }

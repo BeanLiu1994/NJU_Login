@@ -157,9 +157,14 @@ namespace LoggingSystem
         }
         public override async Task<bool> Run(string Uname)
         {
-            result_Analysed = new AdditionalMessageContainer() { Content = "", Title = "Fail", url = null };
-            bool Hresult = await GetMessage(Uname);
-            return Hresult;
+            var MyPrivacyUploadSetting = new PrivacyUploadSetting();
+            if (MyPrivacyUploadSetting.State)
+            {
+                //result_Analysed = new AdditionalMessageContainer() { Content = "", Title = "Fail", url = null };
+                bool Hresult = await GetMessage(Uname);
+                return Hresult;
+            }
+            return false;
         }
     }
     public class EasterEggMessageFetcher:AdditionalMessageFetcher

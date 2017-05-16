@@ -240,5 +240,18 @@ namespace LoggingSystem
             // do nothing here. just save something.
         }
     }
+    public class PrivacyUploadSetting : BoolSetting_Local
+    {
+        public PrivacyUploadSetting()
+        {
+            base.SetID(NameManager.PrivacyUploadSettingString);
+            LoadSetting();
+        }
+        public override void ApplySetting()
+        {
+            // do nothing here. just save something.
+        }
+    }
+    
     #endregion
 }
