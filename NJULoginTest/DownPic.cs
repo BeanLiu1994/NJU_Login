@@ -19,7 +19,7 @@ namespace NJULoginTest
     public class PictureInfo : LoggingSystem.DataFetcher
     {
         private const string url = NameManager.HTTPServerAddrPrefix + "/cgi-bin/BingImageCGI.py";
-        private const string url_bak = "http://www.dujin.org/sys/bing/1920.php";
+        private const string url_bak = "https://api.dujin.org/bing/1366.php";
         private string RecentInfo;
         public DataType_ShowInfo PreparedData { get; private set; }
         public PictureInfo()
@@ -29,8 +29,6 @@ namespace NJULoginTest
         public async Task<DataType_ShowInfo> RunSession()
         {
             RecentInfo = await PostToUrl(url);
-            if (RecentInfo == "")
-                RecentInfo = await PostToUrl(url_bak);
             bool Connectivity = HandleRecentInfo();
             return GetPicInfo();
         }
@@ -38,8 +36,12 @@ namespace NJULoginTest
         {
             if (RecentInfo.Length == 0)
             {
-                PicInfo = null;
-                Debug.WriteLine("PicInfo -- NoNetwork");
+                PicInfo = new PicUrlConfig();
+                PicInfo.title = "Bing Daily Image.";
+                PicInfo.copyrightinfo = "";
+                PicInfo.desc = "";
+                PicInfo.url = url_bak;
+                Debug.WriteLine("PicInfo -- Service might be Unreachable. Try bak method");
                 return false;
             }
             else
