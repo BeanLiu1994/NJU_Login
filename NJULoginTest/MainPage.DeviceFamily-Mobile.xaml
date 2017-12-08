@@ -274,7 +274,7 @@
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
-            <PivotItem>
+            <!--<PivotItem>
                 <PivotItem.Header>
                     <StackPanel>
                         <TextBlock Text="&#xE7A8;" FontFamily="Segoe MDL2 Assets" FontSize="26.667" HorizontalAlignment="Center" />
@@ -284,7 +284,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <Frame Name="BillPage"/>
                 </ScrollViewer>
-            </PivotItem>
+            </PivotItem>-->
             <PivotItem Tag="BackGround">
                 <PivotItem.Header>
                     <StackPanel>
