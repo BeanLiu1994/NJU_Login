@@ -51,6 +51,7 @@ namespace NJULoginTest
         RefreshLoginSetting MyRefreshLoginSetting = new RefreshLoginSetting();
         NetworkStateChangeLoginSetting MyNetworkStateChangeLoginSetting = new NetworkStateChangeLoginSetting();
         PrivacyUploadSetting MyPrivacyUploadSetting = new PrivacyUploadSetting();
+        BGTransparentSetting MyBGTransparentSetting = new BGTransparentSetting();
         public ShowSettings()
         {
             Current = this;
@@ -73,6 +74,9 @@ namespace NJULoginTest
 
             MyPrivacyUploadSetting.LoadSetting();
             MyPrivacyUploadSetting_UI.IsOn = (MyPrivacyUploadSetting.State);
+
+            MyBGTransparentSetting.LoadSetting();
+            MyBGTransparentSetting_UI.IsOn = (MyBGTransparentSetting.State);
 
             Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }
@@ -162,6 +166,12 @@ namespace NJULoginTest
         {
             var sender = original_sender as ToggleSwitch;
             MyPrivacyUploadSetting.ApplySetting(sender.IsOn);
+        }
+
+        private void BGTransparentSetter(object original_sender, RoutedEventArgs e)
+        {
+            var sender = original_sender as ToggleSwitch;
+            MyBGTransparentSetting.ApplySetting(sender.IsOn);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace NJULoginTest
         public PicInfoViewer()
         {
             this.InitializeComponent();
-            InputPicInfo = new DataType_ShowInfo() { Content="",Title = "欢迎使用",Url="/Assets/bg.jpg" };
+            InputPicInfo = new DataType_ShowInfo() { Content="",Title = "欢迎使用", Url = "/Asets/SplashScrenn.scale-200.png" };
         }
         
         public void ShowInfo()

@@ -16,6 +16,7 @@ using Windows.Networking.Connectivity;
 using LoggingSystem;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using LoggingSystem;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -69,11 +70,14 @@ namespace NJULoginTest
             }
         }
 
+        private BGTransparentSetting MyBGSetting = new BGTransparentSetting();
         private TimeChecker myChecker30Min = new TimeChecker(new TimeSpan(0, 30, 0));
         public async Task RefreshPic()
         {
             if (!myChecker30Min.Check_ReadOnly()) return;
             if (NetworkCheck.IsWwanConnectionNow()) return;
+            MyBGSetting.LoadSetting(); if (MyBGSetting.State) return;
+
             var mypicinfo = new PictureInfo();
             PicInfoShowing = await mypicinfo.RunSession();
             if (PicInfoShowing != null)

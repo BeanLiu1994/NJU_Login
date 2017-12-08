@@ -152,7 +152,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\bg.jpg" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Square310x310Logo.scale-200.png" />

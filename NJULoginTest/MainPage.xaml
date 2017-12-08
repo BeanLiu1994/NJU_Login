@@ -8,10 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="LoadedPage">
     <Page.Background>
-        <AcrylicBrush BackgroundSource="HostBackdrop" TintOpacity="1"/>
+        <AcrylicBrush BackgroundSource="HostBackdrop" TintColor="White" TintOpacity="0.1" FallbackColor="DimGray"/>
     </Page.Background>
     <Page.Resources>
-        <AcrylicBrush x:Key="BG"  BackgroundSource="Backdrop" TintColor="DarkGray" TintOpacity="0.1"/>
+        <AcrylicBrush x:Key="BG"  BackgroundSource="Backdrop" TintColor="Purple" TintOpacity="0.08"/>
     </Page.Resources>
     <Grid>
         <local:PicInfoViewer x:Name="PicBkg"/>

@@ -252,6 +252,17 @@ namespace LoggingSystem
             // do nothing here. just save something.
         }
     }
-    
+    public class BGTransparentSetting : BoolSetting_Local
+    {
+        public BGTransparentSetting()
+        {
+            base.SetID(NameManager.BGTransparentSettingString);
+            LoadSetting();
+        }
+        public override void ApplySetting()
+        {
+            // do nothing here. just save something.
+        }
+    }
     #endregion
 }
