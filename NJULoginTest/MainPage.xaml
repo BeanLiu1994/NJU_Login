@@ -17,13 +17,14 @@
         <local:PicInfoViewer x:Name="PicBkg"/>
         <!--<Image Source="http://www.dujin.org/sys/bing/1920.php" Stretch="UniformToFill"/>-->
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <Grid Margin="20">
+            <Grid Margin="20" Name="MainGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -54,26 +55,7 @@
                         </Grid>
                     </StackPanel>
                 </controls:Expander>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="WindowsState">
-                        <VisualState x:Name="wideView">
-                            <VisualState.StateTriggers>
-                                <AdaptiveTrigger MinWindowWidth="720" />
-                            </VisualState.StateTriggers>
-                        </VisualState>
-                        <VisualState x:Name="narrowView">
-                            <VisualState.StateTriggers>
-                                <AdaptiveTrigger MinWindowWidth="0" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Target="Window_2.RowSpan" Value="1"/>
-                                <Setter Target="Window_3.RowSpan" Value="1"/>
-                                <Setter Target="Window_3.Row" Value="1"/>
-                                <Setter Target="Window_3.Column" Value="1"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
+                
             </Grid>
         </ScrollViewer>
         <!--<Frame Name="BillPage"/>-->

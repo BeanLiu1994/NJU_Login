@@ -85,6 +85,77 @@ namespace NJULoginTest
 
         private async void LoadedPage(object sender, RoutedEventArgs e)
         {
+            this.SizeChanged += (o, s) =>
+            {
+                if (s.NewSize.Width > 1200)
+                {
+                    MainGrid.ColumnDefinitions.Clear();
+                    {
+                        var ColDef = new ColumnDefinition();
+                        ColDef.Width = new GridLength(1, GridUnitType.Star);
+                        MainGrid.ColumnDefinitions.Add(ColDef);
+                    }
+                    {
+                        var ColDef = new ColumnDefinition();
+                        ColDef.Width = new GridLength(1, GridUnitType.Star);
+                        MainGrid.ColumnDefinitions.Add(ColDef);
+                    }
+                    {
+                        var ColDef = new ColumnDefinition();
+                        ColDef.Width = new GridLength(1, GridUnitType.Star);
+                        MainGrid.ColumnDefinitions.Add(ColDef);
+                    }
+
+                    Grid.SetRowSpan(Window_1, 3);
+                    Grid.SetRowSpan(Window_2, 3);
+                    Grid.SetRowSpan(Window_3, 3);
+                    Grid.SetColumn(Window_2, 1);
+                    Grid.SetColumn(Window_3, 2);
+                    Grid.SetRow(Window_2, 0);
+                    Grid.SetRow(Window_3, 0);
+                }
+                else if (s.NewSize.Width > 800)
+                {
+                    MainGrid.ColumnDefinitions.Clear();
+                    {
+                        var ColDef = new ColumnDefinition();
+                        ColDef.Width = new GridLength(1, GridUnitType.Star);
+                        MainGrid.ColumnDefinitions.Add(ColDef);
+                    }
+                    {
+                        var ColDef = new ColumnDefinition();
+                        ColDef.Width = new GridLength(1, GridUnitType.Star);
+                        MainGrid.ColumnDefinitions.Add(ColDef);
+                    }
+
+                    Grid.SetRowSpan(Window_1, 3);
+                    Grid.SetRowSpan(Window_2, 1);
+                    Grid.SetRowSpan(Window_3, 2);
+                    Grid.SetColumn(Window_2, 1);
+                    Grid.SetColumn(Window_3, 1);
+                    Grid.SetRow(Window_2, 0);
+                    Grid.SetRow(Window_3, 1);
+                }
+                else
+                {
+
+                    MainGrid.ColumnDefinitions.Clear();
+                    {
+                        var ColDef = new ColumnDefinition();
+                        ColDef.Width = new GridLength(1, GridUnitType.Star);
+                        MainGrid.ColumnDefinitions.Add(ColDef);
+                    }
+
+                    Grid.SetRowSpan(Window_1, 1);
+                    Grid.SetRowSpan(Window_2, 1);
+                    Grid.SetRowSpan(Window_3, 1);
+                    Grid.SetColumn(Window_2, 0);
+                    Grid.SetColumn(Window_3, 0);
+                    Grid.SetRow(Window_2, 1);
+                    Grid.SetRow(Window_3, 2);
+                }
+
+            };
             await RefreshPic();
         }
 
