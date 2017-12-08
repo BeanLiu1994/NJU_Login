@@ -29,7 +29,7 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
     </UserControl.Resources>
-    <StackPanel Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+    <StackPanel>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LoginState">
                 <VisualState x:Name="Normal"/>

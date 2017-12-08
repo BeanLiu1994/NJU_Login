@@ -19,7 +19,7 @@ namespace NJULoginTest
     public class PictureInfo : LoggingSystem.DataFetcher
     {
         private const string url = NameManager.HTTPServerAddrPrefix + "/cgi-bin/BingImageCGI.py";
-        private const string url_bak = "http://lab.dobyi.com/api/bing.php";
+        private const string url_bak = "http://www.dujin.org/sys/bing/1920.php";
         private string RecentInfo;
         public DataType_ShowInfo PreparedData { get; private set; }
         public PictureInfo()

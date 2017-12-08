@@ -36,7 +36,6 @@ namespace NJULoginTest
             LoggingSystem.LoggingSystem.SystemControl.ReturnDataEvent += SystemControl_ReturnDataEvent;
             Current = this;
             PageRefresh();
-            AutoLoginSession();
         }
         private async Task<bool> AutoLoginSession()
         {
@@ -71,6 +70,7 @@ namespace NJULoginTest
 
         public void PageRefresh()
         {
+            AutoLoginSession();
             LoginPanel.PageRefresh();
             Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }

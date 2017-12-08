@@ -14,7 +14,8 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    <Grid Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+    <Grid>
+        <!-- Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}"-->
         <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" ItemTemplate="{StaticResource Data_ListItem}" SelectionMode="None" Style="{StaticResource StuInfoListStyle}"/>
     </Grid>
 </Page>

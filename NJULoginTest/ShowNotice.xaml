@@ -14,7 +14,7 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    <StackPanel Background="{ThemeResource SystemControlHighlightAltAltMediumHighBrush}">
+    <StackPanel>
         <TextBlock Text="通知信息" FontSize="30" HorizontalAlignment="Center" Margin="10" Tapped="RefreshPage"/>
         <ListView Name="MyList" ItemsSource="{x:Bind Path=mydata,Mode=OneWay}" SelectionMode="None" ItemTemplate="{StaticResource Notice_ListItem}" Style="{StaticResource StuInfoListStyle}"/>
     </StackPanel>

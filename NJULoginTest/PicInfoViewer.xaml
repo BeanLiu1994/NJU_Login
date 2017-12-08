@@ -47,7 +47,7 @@
                     <EntranceThemeTransition />
                 </TransitionCollection>
             </StackPanel.Transitions>
-            <TextBlock x:Name="dt_title" Text="{x:Bind Path=InputPicInfo.Title,Mode=OneWay}" FontSize="27" Margin="5" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+            <TextBlock x:Name="dt_title" Text="{x:Bind Path=InputPicInfo.Title,Mode=OneWay}" FontSize="27" Margin="5" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"/>
             <TextBlock x:Name="dt_content" Text="{x:Bind Path=InputPicInfo.Content,Mode=OneWay}" FontSize="12" Margin="5,0,5,5" HorizontalAlignment="Right" TextWrapping="Wrap" Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" MaxWidth="350" FlowDirection="RightToLeft"/>
         </StackPanel>
     </Grid>

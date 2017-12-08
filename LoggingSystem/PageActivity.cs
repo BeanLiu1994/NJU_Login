@@ -209,7 +209,7 @@ namespace LoggingSystem
                 PreparedInfo.mac = UserConfig.userinfo.mac;
                 PreparedInfo.service_name = UserConfig.userinfo.service_name;
                 PreparedInfo.username = UserConfig.userinfo.username;
-                PreparedInfo.useripv4 = EncryptUtil.ip2Str(UserConfig.userinfo.useripv4, true);
+                PreparedInfo.useripv4 = EncryptUtil.ip2Str(UserConfig.userinfo.useripv4);
                 PreparedInfo.useripv6 = UserConfig.userinfo.useripv6;
             }
             return PreparedInfo;
