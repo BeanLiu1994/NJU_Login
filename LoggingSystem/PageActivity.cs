@@ -428,6 +428,9 @@ namespace LoggingSystem
             string b_notice = "";
             Recorder.GetRecordString(NameManager.LastTimeNotice, ref b_notice);
 
+            if (UserConfig.notice == null)
+            { Debug.WriteLine("|当前没有通知."); return; }
+
             if (b_notice != RecentInfo)
             {
                 Recorder.AlterRecordString(NameManager.LastTimeNotice, RecentInfo);
