@@ -1,4 +1,4 @@
-#!C:\Python27\python.exe
+#!D:\Anaconda2\python.exe
 # -*- coding: utf-8 -*-
 
 import cgi
@@ -17,7 +17,7 @@ def pic_download(IsDownLoadEnabled):
 	InfoGet=response.read()
 	mydata = json.loads(InfoGet,object_pairs_hook=OrderedDict)
 	response.close()
-	imageurl=mydata['images'][0]['url']
+	imageurl='http://cn.bing.com'+mydata['images'][0]['url']
 	filetype = imageurl.split('.')[-1]
 	now=datetime.datetime.now()
 	otherStyleTime = now.strftime("%Y_%m_%d_BingImage")
@@ -69,5 +69,3 @@ def http_get():
 print "Content-type:application/json' \r\n\r\n"
 
 print(http_get())
-
-#print('{"title":"颜值巅峰","desc":"欢迎学弟学妹来305读研读博","url":"http://visg.nju.edu.cn:16043/ImageToday.jpg","copyrightinfo":" "}')
