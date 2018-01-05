@@ -1,4 +1,5 @@
 ﻿using LoggingSystem;
+using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -103,18 +104,20 @@ namespace NJULoginTest
             MyRefreshLoginSetting.ApplySetting(sender.IsOn);
         }
 
-        private async void NetworkStateChangeLoginSetter(object original_sender, RoutedEventArgs e)
+        private void NetworkStateChangeLoginSetter(object original_sender, RoutedEventArgs e)
         {
             var sender = original_sender as ToggleSwitch;
             MyNetworkStateChangeLoginSetting.ApplySetting(sender.IsOn);
             if (sender.IsOn)
             {
+                if (!BackgroundTaskHelper.IsBackgroundTaskRegistered(NameManager.LIVETILETASK_NetWorkChanged))
+                {
+                    BackgroundTaskHelper.Register(
+                        NameManager.LIVETILETASK_NetWorkChanged,
+                        typeof(TileRefresh.TileRefreshUtils).FullName,
+                        new SystemTrigger(SystemTriggerType.NetworkStateChange, false));
+                }
                 //RefreshLoginSetting_UI.IsEnabled = true;
-                await App.RegisterLiveTileTask(
-                    NameManager.LIVETILETASK_NetWorkChanged,
-                    typeof(TileRefresh.TileRefreshUtils).FullName,
-                    new SystemTrigger(SystemTriggerType.NetworkStateChange, false),
-                    null);
                 //await App.RegisterLiveTileTask(
                 //    NameManager.LIVETILETASK_UserPresent,
                 //    typeof(TileRefresh.TileRefreshUtils).FullName,
@@ -127,11 +130,10 @@ namespace NJULoginTest
                 //RefreshLoginSetting_UI.IsOn = false;
                 //MyRefreshLoginSetting.ApplySetting(false);
                 //RefreshLoginSetting_UI.IsEnabled = false;
-                await App.RegisterLiveTileTask(
-                    NameManager.LIVETILETASK_NetWorkChanged,
-                    typeof(TileRefresh.TileRefreshUtils).FullName,
-                    null,
-                    null);
+                //if (BackgroundTaskHelper.IsBackgroundTaskRegistered(NameManager.LIVETILETASK_NetWorkChanged))
+                //{
+                //    BackgroundTaskHelper.Unregister(NameManager.LIVETILETASK_NetWorkChanged);
+                //}
                 //await App.RegisterLiveTileTask(
                 //    NameManager.LIVETILETASK_UserPresent,
                 //    typeof(TileRefresh.TileRefreshUtils).FullName,

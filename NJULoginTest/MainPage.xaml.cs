@@ -16,7 +16,6 @@ using Windows.Networking.Connectivity;
 using LoggingSystem;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using LoggingSystem;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
