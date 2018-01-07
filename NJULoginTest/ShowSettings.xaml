@@ -12,7 +12,7 @@
         <ToggleSwitch Name="MyBGTransparentSetting_UI" Header="背景亚克力(需重启应用)" OffContent="关" OnContent="开" Margin="10" Toggled="BGTransparentSetter"/>
         <ToggleSwitch Name="AutoLoginSetting_UI" Header="自动登录(应用窗口显示时)" OffContent="关" OnContent="开" Margin="10" Toggled="AutoLoginSetter"/>
         <ToggleSwitch Name="NetworkStateChangeLoginSetting_UI" Header="自动登录(网络变化时)" OffContent="关" OnContent="开" Margin="10" Toggled="NetworkStateChangeLoginSetter"/>
-        <ToggleSwitch Name="UserPresentLoginSetting_UI" Header="自动登录(用户登陆时)" OffContent="关" OnContent="开" Margin="10" Toggled="UserPresentLoginSetter"/>
+        <ToggleSwitch Name="UserPresentLoginSetting_UI" Header="自动登录(大概在开机后)(可能不好用)" OffContent="关" OnContent="开" Margin="10" Toggled="UserPresentLoginSetter" Visibility="Collapsed"/>
         <ToggleSwitch Name="RefreshLoginSetting_UI" Header="自动登录(刷新磁贴时_15Min)" OffContent="关" OnContent="开" Margin="10" Toggled="RefreshLoginSetter"/>
         <ToggleSwitch Name="MyPrivacyUploadSetting_UI" Header="允许上传登陆统计信息" OffContent="关" OnContent="开" Margin="10" Toggled="MyPrivacyUploadSetting_UI_Toggled"/>
         <ToggleSwitch Name="TestModeSetting_UI" Header="测试模式" OffContent="关" OnContent="开" Margin="10" Toggled="TestModeSetter" Visibility="Collapsed"/>
