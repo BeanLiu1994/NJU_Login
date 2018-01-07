@@ -240,6 +240,18 @@ namespace LoggingSystem
             // do nothing here. just save something.
         }
     }
+    public class UesrPresentLoginSetting : BoolSetting_Local
+    {
+        public UesrPresentLoginSetting()
+        {
+            base.SetID(NameManager.UesrPresentLoginSettingString);
+            LoadSetting();
+        }
+        public override void ApplySetting()
+        {
+            // do nothing here. just save something.
+        }
+    }
     public class PrivacyUploadSetting : BoolSetting_Local
     {
         public PrivacyUploadSetting()

@@ -312,7 +312,7 @@ namespace TileRefresh
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
-            bool IsNetworkStateChangeTrigger = false;
+            bool ActivateLogin = false;
             switch(taskInstance.Task.Name)
             {
                 case NameManager.LIVETILETASK_NetWorkChanged:
@@ -327,26 +327,36 @@ namespace TileRefresh
                             return;
                         }
                         Debug.WriteLine("网络连接变化");
-                        IsNetworkStateChangeTrigger = true;
+                        NetworkStateChangeLoginSetting MyNetworkStateChangeLoginSetting = new NetworkStateChangeLoginSetting();
+                        ActivateLogin = MyNetworkStateChangeLoginSetting.State;
                     }  
                     break;
                 case NameManager.LIVETILETASK_UserPresent:
-                    IsNetworkStateChangeTrigger = true;
+                    UesrPresentLoginSetting MyUesrPresentLoginSetting = new UesrPresentLoginSetting();
+                    ActivateLogin = MyUesrPresentLoginSetting.State;
+                    Debug.WriteLine("触发用户登陆");
+                    break;
+                case NameManager.LIVETILETASK_Timer:
+                    RefreshLoginSetting MyAutoLoginSetting = new RefreshLoginSetting();
+                    ActivateLogin = MyAutoLoginSetting.State;
+                    Debug.WriteLine("触发定时登陆");
                     break;
                 default:break;
             }
 
             Debug.WriteLine("磁铁任务开始");            
             bool Hresult_notice = await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetNotice);
-            if(!Hresult_notice)
+            if (!Hresult_notice)
                 UpdateTile_NoNetWork();//如果无法刷新
             else
-                Hresult_notice = !await LoggingSystem.LoggingSystem.SystemControl.RefreshLoginSession(IsNetworkStateChangeTrigger);
-            if(Hresult_notice)
             {
-                Hresult_notice = await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
-                // 这里因为await在 Event的地方停止了所以没有继续等待GetVolume的执行 此处手动等待1.5s 这是最长的可能延时
-                await Task.Delay(1000);
+                Hresult_notice = !await LoggingSystem.LoggingSystem.SystemControl.RefreshLoginSession(ActivateLogin);
+                if (!ActivateLogin)
+                {
+                    Hresult_notice = await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
+                    // 这里因为await在 Event的地方停止了所以没有继续等待GetVolume的执行 此处手动等待1.5s 这是最长的可能延时
+                    await Task.Delay(1000);
+                }
             }
             Debug.WriteLine("磁铁任务完成");
             deferral.Complete();

@@ -37,18 +37,6 @@ namespace NJULoginTest
             Current = this;
             PageRefresh();
         }
-        private async Task<bool> AutoLoginSession()
-        {
-            AutoLoginSetting MyAutoLoginSetting = new AutoLoginSetting();
-            LoggingSystem.LoggingSystem.SystemControl.RegisterFetcherUser(new Login(LoginPanel.Username, LoginPanel.Password));
-            if (MyAutoLoginSetting.State)
-            {
-                LoginPanel.CurrentState = LoginUIState.Waiting;
-                await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.LoginPage);
-                Debug.WriteLine("已尝试自动登录");
-            }
-            return MyAutoLoginSetting.State;
-        }
 
         private void SystemControl_ReturnDataEvent(Pages PageType, bool Hresult, ReturnData HArgs)
         {
@@ -70,7 +58,6 @@ namespace NJULoginTest
 
         public void PageRefresh()
         {
-            AutoLoginSession();
             LoginPanel.PageRefresh();
             Debug.WriteLine("刷新了" + this.GetType().ToString() + "的内容");
         }

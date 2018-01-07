@@ -51,6 +51,7 @@ namespace NJULoginTest
         AutoLoginSetting MyAutoLoginSetting = new AutoLoginSetting();
         RefreshLoginSetting MyRefreshLoginSetting = new RefreshLoginSetting();
         NetworkStateChangeLoginSetting MyNetworkStateChangeLoginSetting = new NetworkStateChangeLoginSetting();
+        UesrPresentLoginSetting MyUesrPresentLoginSetting = new UesrPresentLoginSetting();
         PrivacyUploadSetting MyPrivacyUploadSetting = new PrivacyUploadSetting();
         BGTransparentSetting MyBGTransparentSetting = new BGTransparentSetting();
         public ShowSettings()
@@ -69,6 +70,9 @@ namespace NJULoginTest
 
             MyRefreshLoginSetting.LoadSetting();
             RefreshLoginSetting_UI.IsOn = (MyRefreshLoginSetting.State);
+
+            MyUesrPresentLoginSetting.LoadSetting();
+            UserPresentLoginSetting_UI.IsOn = (MyUesrPresentLoginSetting.State);
 
             MyNetworkStateChangeLoginSetting.LoadSetting();
             NetworkStateChangeLoginSetting_UI.IsOn = (MyNetworkStateChangeLoginSetting.State);
@@ -104,7 +108,13 @@ namespace NJULoginTest
             MyRefreshLoginSetting.ApplySetting(sender.IsOn);
         }
 
-        private void NetworkStateChangeLoginSetter(object original_sender, RoutedEventArgs e)
+        private void UserPresentLoginSetter(object original_sender, RoutedEventArgs e)
+        {
+            var sender = original_sender as ToggleSwitch;
+            MyUesrPresentLoginSetting.ApplySetting(sender.IsOn);
+        }
+
+        private async void NetworkStateChangeLoginSetter(object original_sender, RoutedEventArgs e)
         {
             var sender = original_sender as ToggleSwitch;
             MyNetworkStateChangeLoginSetting.ApplySetting(sender.IsOn);
@@ -112,6 +122,7 @@ namespace NJULoginTest
             {
                 if (!BackgroundTaskHelper.IsBackgroundTaskRegistered(NameManager.LIVETILETASK_NetWorkChanged))
                 {
+                    await BackgroundExecutionManager.RequestAccessAsync();
                     BackgroundTaskHelper.Register(
                         NameManager.LIVETILETASK_NetWorkChanged,
                         typeof(TileRefresh.TileRefreshUtils).FullName,

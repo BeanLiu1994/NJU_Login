@@ -114,31 +114,39 @@ namespace NJULoginTest
             };
         }
 
-        private void RegisterWorks()
+        private async void RegisterWorks()
         {
+            foreach (var t in BackgroundTaskRegistration.AllTasks)
+            {
+                t.Value.Unregister(true);
+            }
+
             if (!BackgroundTaskHelper.IsBackgroundTaskRegistered(NameManager.LIVETILETASK_Timer))
             {
+                await BackgroundExecutionManager.RequestAccessAsync();
                 BackgroundTaskHelper.Register(
                     NameManager.LIVETILETASK_Timer,
                     typeof(TileRefreshUtils).FullName,
-                    new TimeTrigger(15, false), false, true,
-                    new SystemCondition(SystemConditionType.FreeNetworkAvailable));
+                    new TimeTrigger(15, false));
             }
 
             if (!BackgroundTaskHelper.IsBackgroundTaskRegistered(NameManager.LIVETILETASK_NetWorkChanged))
             {
+                await BackgroundExecutionManager.RequestAccessAsync();
                 BackgroundTaskHelper.Register(
                     NameManager.LIVETILETASK_NetWorkChanged,
                     typeof(TileRefreshUtils).FullName,
                     new SystemTrigger(SystemTriggerType.NetworkStateChange, false));
             }
-            
-            //await RegisterLiveTileTask(
-            //    NameManager.LIVETILETASK_UserPresent,
-            //    typeof(TileRefreshUtils).FullName,
-            //    new SystemTrigger(SystemTriggerType.UserPresent, false),
-            //    null
-            //    );
+            if (!BackgroundTaskHelper.IsBackgroundTaskRegistered(NameManager.LIVETILETASK_UserPresent))
+            {
+                await BackgroundExecutionManager.RequestAccessAsync();
+                BackgroundTaskHelper.Register(
+                    NameManager.LIVETILETASK_UserPresent,
+                    typeof(TileRefreshUtils).FullName,
+                    new SystemTrigger(SystemTriggerType.SessionConnected, false)
+                );
+            }
         }
 
         private void OnResuming(object sender, object e)

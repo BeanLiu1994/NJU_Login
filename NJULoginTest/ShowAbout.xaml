@@ -26,6 +26,7 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                 <TextBlock Text="仅能在南京大学校园网内使用" TextWrapping="Wrap" Margin="5,5,5,0"/>
                 <TextBlock Text="点击标题可以刷新页面" TextWrapping="Wrap" Margin="5,5,5,0"/>
+                <TextBlock Text="自动登陆需要保存登陆信息" TextWrapping="Wrap" Margin="5,5,5,0"/>
                 <TextBlock Text="登陆信息保存后会在不同设备间同步，前提是登陆了相同的微软账号" TextWrapping="Wrap" Margin="5,5,5,0"/>
                 <TextBlock Text="在信息页点击文字部分可以复制内容" TextWrapping="Wrap" Margin="5,5,5,0"/>
                 <TextBlock Text="有新通知会发出通知消息，在通知页点击文字部分可以打开对应的链接" TextWrapping="Wrap" Margin="5,5,5,0"/>

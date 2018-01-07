@@ -1,1 +1,1 @@
-C:\Users\njuee\Documents\Visual Studio 2017\Projects\njulogintest\NJULoginTest\bin\ARM\Release\Upload\NJULoginTest_1.3.18.0\NJULoginTest_1.3.18.0_x86_x64_arm.appxbundle
+F:\NJU_Login\NJULoginTest\bin\ARM\Release\Upload\NJULoginTest_2.0.8.0\NJULoginTest_2.0.8.0_x86_x64_arm.appxbundle

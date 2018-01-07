@@ -45,25 +45,23 @@ namespace LoggingSystem
             
         }
 
-        public async Task<bool> RefreshLoginSession(bool IsNetworkStateChangeTrigger)
+        public async Task<bool> RefreshLoginSession(bool ActivateLogin)
         {
             UserPassSaver_Roam UINFOSaver = new UserPassSaver_Roam();
-            RefreshLoginSetting MyAutoLoginSetting = new RefreshLoginSetting();
-            NetworkStateChangeLoginSetting MyNetworkStateChangeLoginSetting = new NetworkStateChangeLoginSetting();
             {
                 string username = "", password = "";
                 UINFOSaver.Load(ref username, ref password);
                 if (username != "" && password != "")
-                    if ((IsNetworkStateChangeTrigger && MyNetworkStateChangeLoginSetting.State)||
-                        (!IsNetworkStateChangeTrigger && MyAutoLoginSetting.State))
+                    if (ActivateLogin)
                     {
                         RegisterFetcherUser(new Login(username, password));
                         await RunConcreteUser(Pages.LoginPage);
                         await Task.Delay(1000);
                         Debug.WriteLine("已尝试自动登录");
+                        return true;
                     }
             }
-            return MyAutoLoginSetting.State || MyNetworkStateChangeLoginSetting.State;
+            return false;
         }
 
         private bool ServiceTypeIsDirectOut = false;

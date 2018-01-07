@@ -37,6 +37,7 @@ namespace LoggingSystem
         public const string NetworkStateChangeLoginSettingString = "NetworkStateChangeLoginSetting";
         public const string PrivacyUploadSettingString = "PrivacyUploadSettingString";
         public const string BGTransparentSettingString = "BGTransparentSettingString";
+        public const string UesrPresentLoginSettingString = "UesrPresentLoginSettingString";
         #endregion
 
         public const string HTTPServerAddrPrefix = "http://visg.nju.edu.cn:16043";

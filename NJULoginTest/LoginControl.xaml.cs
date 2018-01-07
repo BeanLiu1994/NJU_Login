@@ -196,12 +196,27 @@ namespace NJULoginTest
         {
             await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.LogoutPage);
         }
+        private async Task<bool> AutoLoginSession()
+        {
+            AutoLoginSetting MyAutoLoginSetting = new AutoLoginSetting();
+            LoggingSystem.LoggingSystem.SystemControl.RegisterFetcherUser(new Login(Username, Password));
+            if (MyAutoLoginSetting.State)
+            {
+                CurrentState = LoginUIState.Waiting;
+                await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.LoginPage);
+                Debug.WriteLine("已尝试自动登录");
+            }
+            else
+            {
+                await LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
+            }
+            return MyAutoLoginSetting.State;
+        }
         public void PageRefresh()
         {
-            //##这一块可能有问题 setter value 的问题 logincontrol的visualstate可能还要改改
             CurrentState = LoginUIState.Waiting;
+            AutoLoginSession();
             //不去等待
-            LoggingSystem.LoggingSystem.SystemControl.RunConcreteUser(Pages.GetInfo);
         }
         private bool PrompLogout = true;
         private async void ActButton_Click(object sender, RoutedEventArgs e)
