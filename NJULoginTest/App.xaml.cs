@@ -19,6 +19,7 @@ using Windows.Foundation.Collections;
 using Windows.Networking.Connectivity;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,6 +27,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WinRTExceptions;
 
 namespace NJULoginTest
 {
@@ -66,7 +68,7 @@ namespace NJULoginTest
         #region 自定义的和LoggingSystem相关的部分
 
         TileRefreshUtils myTRU = new TileRefreshUtils();
-        private async void AllRefresh()
+        private void AllRefresh()
         {            
             if (ShowLogin.Current != null) { ShowLogin.Current.PageRefresh(); }
             if (ShowNotice.Current != null) { ShowNotice.Current.PageRefresh(); }
@@ -87,6 +89,7 @@ namespace NJULoginTest
             this.Resuming += OnResuming;
             RegisterWorks();
             LoggingSystem.LoggingSystem.HasWindow = true;
+            this.UnhandledException += App_UnhandledException;
         }
 
         private void OnNetworkChanged()
@@ -153,6 +156,31 @@ namespace NJULoginTest
         {
             AllRefresh();
         }
+
+
+        private void RegisterExceptionHandlingSynchronizationContext()
+        {
+            ExceptionHandlingSynchronizationContext
+                .Register()
+                .UnhandledException += SynchronizationContext_UnhandledException;
+        }
+
+        private async void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+
+            await new MessageDialog("Application Unhandled Exception:\r\n" + e.Exception.Message)
+                .ShowAsync();
+        }
+
+        private async void SynchronizationContext_UnhandledException(object sender, WinRTExceptions.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+
+            await new MessageDialog("Synchronization Context Unhandled Exception:\r\n" + e.Exception.Message)
+                .ShowAsync();
+        }
+
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -168,6 +196,7 @@ namespace NJULoginTest
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
 
+            RegisterExceptionHandlingSynchronizationContext();
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
             if (rootFrame == null)
@@ -229,6 +258,7 @@ namespace NJULoginTest
         protected async override void OnActivated(IActivatedEventArgs args)
         {
             if (ShowInfo.Current == null) { App.Current.Exit(); return; }
+            RegisterExceptionHandlingSynchronizationContext();
             if (args.Kind == ActivationKind.Protocol)
             {
                 var protocalArgs = (ProtocolActivatedEventArgs)args;

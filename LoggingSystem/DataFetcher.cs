@@ -62,6 +62,33 @@ namespace LoggingSystem
             //返回结果网页（html）代码
             return result;
         }
+
+        protected async Task<string> GetFromUrl(string url)
+        {
+            string result = "";
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(1.5));//设置延时时间2.5s
+            try
+            {
+                HttpClient myHC = new HttpClient();
+                HttpResponseMessage response = await myHC.GetAsync(new Uri(url), cts.Token);
+                result = await response.Content.ReadAsStringAsync();
+            }
+            catch (TaskCanceledException e)
+            {
+                Debug.WriteLine("连接超时");
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine("可能出现的问题是: api修改 网络断开 没有使用校园网");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("exception!!");
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine("可能出现的问题是: api修改 网络断开 没有使用校园网");
+            }
+            //返回结果网页（html）代码
+            return result;
+        }
     }
     public class DataFetcher : IDataFetcher
     {
@@ -83,7 +110,7 @@ namespace LoggingSystem
             PageURLs[(int)Pages.GetInfo] = @"http://p.nju.edu.cn/portal_io/getinfo";
             PageURLs[(int)Pages.GetVolume] = @"http://p.nju.edu.cn/portal_io/selfservice/volume/getlist";//时长
 
-            PageURLs[(int)Pages.GetNotice] = @"http://p.nju.edu.cn/portal_io/proxy/notice";//通知
+            PageURLs[(int)Pages.GetNotice] = @"http://p.nju.edu.cn/notice.json";//通知
             PageURLs[(int)Pages.GetList] = @"http://p.nju.edu.cn/portal_io/selfservice/online/getlist";
             PageURLs[(int)Pages.GetAuthLog] = @"http://p.nju.edu.cn/portal_io/selfservice/authlog/getlist";
             PageURLs[(int)Pages.GetUsage] = @"http://p.nju.edu.cn/portal_io/selfservice/acct/getlist";
@@ -99,6 +126,10 @@ namespace LoggingSystem
         public override async Task<string> PostToUrl_WithPagesSelector(Pages PageIndex, string _username = "", string _password = "")
         {
             int SiteSelector = (int)PageIndex;
+            if (PageIndex == Pages.GetNotice)
+            {
+                return await GetFromUrl(PageURLs[SiteSelector]);
+            }
             if (_username == null || _password == null)
             {
                 _username = "";
